@@ -4,7 +4,9 @@ from accounts import views
 app_name = "accounts"
 
 urlpatterns = [
-    path('', include('django.contrib.auth.urls'))
+    path('', include('django.contrib.auth.urls')),
+    path('signup/', views.SignUpView.as_view(), name="signup")
+
 ]
 
 # accounts/login/ [name='login']

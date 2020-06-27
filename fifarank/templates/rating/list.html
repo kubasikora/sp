@@ -7,10 +7,10 @@
     <ul class="list-group">
     {% for rating in ratings %}
     <li class="list-group-item">
-        <b style="font-size: 24px">{{ rating.user.username }} <i style="font-size:20px">({{ rating.user.first_name }} {{ rating.user.last_name }})</i> - {{ rating.value }}</b>
+        <b style="font-size: 20px">{{ rating.user.username }} - {{ rating.value }}</b>
     </li>
     {% endfor %}
     </ul>
-
+    <br/>
     {% include "pagination.html" with page=ratings %}
 {% endblock %}

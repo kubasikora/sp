@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.dispatch import receiver
 
 class Game(models.Model):
     name = models.CharField(max_length=8, unique=True)
@@ -25,13 +26,18 @@ class TeamRating(models.TextChoices):
 
 class UserRating(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="rating")
-    value = models.DecimalField(max_digits=7, decimal_places=2)
+    value = models.DecimalField(max_digits=7, decimal_places=2, default=1500)
 
     class Meta:
         ordering = ("-value",)
 
     def __str__(self):
         return f"{self.user}: {self.value}"
+
+    @receiver(models.signals.post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            UserRating.objects.create(user=instance)
 
 class Country(models.Model):
     name = models.CharField(max_length=30)
@@ -49,7 +55,6 @@ class League(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="leagues")
     level = models.PositiveIntegerField()
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="leagues")
-
 
     class Meta:
         ordering = ("country", "level")

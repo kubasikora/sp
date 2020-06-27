@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'fifarank',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'sp.urls'
+
+LOGIN_REDIRECT_URL = '/fifarank/ranking'
+LOGOUT_REDIRECT_URL = '/fifarank/teams'
 
 TEMPLATES = [
     {

@@ -6,13 +6,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+            {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'fifarank:user_rating_list' %}">Ranking</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'fifarank:team_list' %}">Drużyny</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:logout' %}">Wyloguj się</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:login' %}">Zaloguj się</a>
+            </li>
+            {% endif %}
         </ul>
     </div>
 </nav>
-

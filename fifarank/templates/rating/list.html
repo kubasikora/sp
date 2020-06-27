@@ -4,10 +4,13 @@
 {% block content %}
     <h1>Ranking użytkowników</h1>
 
+    <ul class="list-group">
     {% for rating in ratings %}
-    <b style="font-size: 24px">{{ rating.user.username }} <i style="font-size:20px">({{ rating.user.first_name }} {{ rating.user.last_name }})</i> - {{ rating.value }}</b>
-    <hr/>
+    <li class="list-group-item">
+        <b style="font-size: 24px">{{ rating.user.username }} <i style="font-size:20px">({{ rating.user.first_name }} {{ rating.user.last_name }})</i> - {{ rating.value }}</b>
+    </li>
     {% endfor %}
+    </ul>
 
     {% include "pagination.html" with page=ratings %}
 {% endblock %}

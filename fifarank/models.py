@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 class Game(models.Model):
@@ -69,6 +70,9 @@ class Team(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.code})"
+
+    def get_absolute_url(self):
+        return reverse('fifarank:team_detail', args=[self.pk])
 
 class Match(models.Model):
     date = models.DateTimeField(auto_now_add=True)

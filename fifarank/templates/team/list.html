@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Dostępne drużyny{% endblock %}
+
+{% block content %}
+    <h1>Dostępne drużyny</h1>
+
+    {% for team in teams %}
+        <b style="font-size: 24px"><a href="{{ team.get_absolute_url }}">{{ team.name }}</a> <i style="font-size:20px">({{ team.code }})</i></b>
+        <h3>Rating: {{ team.rating }} Wersja: {{ team.game }}</h3>
+        <hr/>
+    {% endfor %}
+
+    {% include "pagination.html" with page=teams %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}{{ team.name }}{% endblock %}
+
+{% block content %}
+    <a href="{% url 'fifarank:team_list' %}">Powrót do listy</a>
+    <h1>{{ team.name }} ({{ team.code }})</h1>
+    <h3>Liga: {{ team.league }}</h3>
+    <h3>Rating: {{ team.rating }} Gra: {{ team.game }}</h3>
+{% endblock %}

@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.dispatch import receiver
 
 class Game(models.Model):
     name = models.CharField(max_length=8, unique=True)
@@ -33,11 +32,6 @@ class UserRating(models.Model):
 
     def __str__(self):
         return f"{self.user}: {self.value}"
-
-    @receiver(models.signals.post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            UserRating.objects.create(user=instance)
 
 class Country(models.Model):
     name = models.CharField(max_length=30)

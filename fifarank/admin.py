@@ -30,7 +30,7 @@ class TeamAdmin(admin.ModelAdmin):
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
-    list_display = ("homeUser", "awayUser", "result", "date")
+    list_display = ("result", "homeUser", "awayUser", "date")
     search_fields = ("homeUser__username", "awayUser__username")
 
     def result(self, obj):

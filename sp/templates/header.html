@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Serwer Piwny DS Riviera</a>
+    <a class="navbar-brand" href="{% url 'home' %}">Serwer Piwny DS Riviera</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -13,6 +13,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'fifarank:team_list' %}">Drużyny</a>
             </li>
+
+            {% if user.is_superuser %}
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">Panel administracyjny</a>
+            </li>
+            {% endif %}
 
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'accounts:logout' %}">Wyloguj się</a>

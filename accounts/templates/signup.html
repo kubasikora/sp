@@ -1,12 +1,59 @@
 {% extends 'base.html' %}
 
-{% block title %}Sign Up{% endblock %}
+{% block title %}Zarejestruj się{% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+
+<!-- <form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <button type="submit">Sign up</button>
+</form> -->
+
+<div class="card">
+  <div class="card-body">
+    <h2>Zarejestruj się</h2>
+    <hr />
+    <form method="post">
+      {% csrf_token %}
+      <!-- {{ form.as_p }} -->
+      <div class="container">
+        <div class="row">
+          <div class="col-2" style="margin-top: auto; font-size: 20px;">Login:</div>
+          <div class="col-10">{{ form.username }}</div>
+        </div>
+
+        <div class="row" style="margin-top: 1rem;">
+          <div class="col-2" style="margin-top: auto; font-size: 20px;">Hasło:</div>
+          <div class="col-10">{{ form.password1 }}</div>
+        </div>
+
+        <div class="row" style="margin-top: 1rem;">
+          <div class="col-2" style="margin-top: auto; font-size: 20px;">Potwierdź hasło:</div>
+          <div class="col-10">{{ form.password2 }}</div>
+        </div>
+
+        {% if form.errors %}
+        <div class="row" style="margin-top: 1rem;">
+          {% for error in form.errors.username %}
+          <div class="col-12" style="margin-top: auto; font-size: 16px; color: red;">{{ error }}</div>
+          {% endfor %}
+          {% for error in form.errors.password2 %}
+          <div class="col-12" style="margin-top: auto; font-size: 16px; color: red;">{{ error }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="row" style="margin-top: 2rem;">
+          <div class="col">
+            <button class="btn btn-dark" type="submit">Zarejestruj się</button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+    <br />
+  </div>
+</div>
 {% endblock %}

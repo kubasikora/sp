@@ -1,15 +1,44 @@
 {% extends "base.html" %}
-{% block title %}Ranking{% endblock %}
+{% block title %}Zaloguj się{% endblock %}
 
 {% block content %}
+<div class="card">
+  <div class="card-body">
+    <h2>Zaloguj się</h2>
+    <hr />
+    <form method="post">
+      {% csrf_token %}
+      <div class="container">
+        <div class="row">
+          <div class="col-2" style="margin-top: auto; font-size: 20px;">Login:</div>
+          <div class="col-10">{{ form.username }}</div>
+        </div>
 
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
-<br/>
-<a href="{% url 'accounts:signup' %}">Nie masz konta? Zarejestruj się!</a>
+        <div class="row" style="margin-top: 1rem;">
+          <div class="col-2" style="margin-top: auto; font-size: 20px;">Hasło:</div>
+          <div class="col-10">{{ form.password }}</div>
+        </div>
 
+        {% if form.errors %}
+        <div class="row" style="margin-top: 1rem;">
+          {% for error in form.non_field_errors %}
+          <div class="col-12" style="margin-top: auto; font-size: 16px; color: red;">{{ error }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="row" style="margin-top: 2rem;">
+          <div class="col">
+            <button class="btn btn-dark" type="submit">Zaloguj się</button>
+            <button class="btn btn-light" type="button">
+              <a style="color:black; text-decoration: none;" href="{% url 'accounts:signup' %}">Zarejestruj się</a>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+    <br />
+  </div>
+</div>
 {% endblock %}

@@ -3,27 +3,42 @@
 {% block title %}Dostępne drużyny{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <h1>Dostępne drużyny</h1>
-        </div>
-        <div class="col-6" style="text-align: right; margin-top: auto;">
-            <a href="{% url 'fifarank:team_add' %}">
-                <h5 style="color: black;">Dodaj</h5>
-            </a>
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h1>Dostępne drużyny</h1>
+                </div>
+                <div class="col-6" style="text-align: right; margin-top: auto;">
+                    <a href="{% url 'fifarank:team_add' %}">
+                        <h5 style="color: black;">Dodaj</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        {% for team in teams %}
+                        <li class="list-group-item">
+                            <a href="{% url 'fifarank:team_detail' team.id %}">
+                                <b style="font-size: 24px; margin-right: auto; color: black; ">{{ team.name }}
+                                    <i style="font-size:20px">({{ team.code }})</i>
+                                </b>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {% include "pagination.html" with page=teams %}
+                </div>
+            </div>
+
         </div>
     </div>
-    <hr/>
-    {% for team in teams %}
-    <a href="{% url 'fifarank:team_detail' team.id %}">
-        <b style="font-size: 24px; margin-right: auto; color: black; ">{{ team.name }}
-            <i style="font-size:20px">({{ team.code }})</i>
-        </b>
-    </a>
-    <hr />
-    {% endfor %}
-
-    {% include "pagination.html" with page=teams %}
 </div>
 {% endblock %}

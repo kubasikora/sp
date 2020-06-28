@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
+from sp.views import HomePageView
 
 urlpatterns = [
+    path('', HomePageView.as_view(), name="home"),
     path('admin/', admin.site.urls),
     path('fifarank/', include('fifarank.urls', namespace='fifarank')),
     path('accounts/', include('accounts.urls', namespace='accounts'))

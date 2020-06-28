@@ -2,16 +2,34 @@
 {% block title %}Ranking{% endblock %}
 
 {% block content %}
-    <h1>Ranking użytkowników</h1>
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Ranking użytkowników</h1>
 
-    <ul class="list-group">
-    {% for rating in ratings %}
-    <li class="list-group-item">
-        <a href="{% url 'fifarank:user_rating_detail' rating.id %}"><b style="font-size: 20px; margin-right: auto; color: black">{{ rating.user.username }}</b></a>
-        <span>{{ rating.value }}</span>
-    </li>
-    {% endfor %}
-    </ul>
-    <br/>
-    {% include "pagination.html" with page=ratings %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        {% for rating in ratings %}
+                        <li class="list-group-item">
+                            <a href="{% url 'fifarank:user_rating_detail' rating.id %}"><b
+                                    style="font-size: 20px; margin-right: auto; color: black">{{ rating.user.username }}</b></a>
+                            <span>{{ rating.value }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {% include "pagination.html" with page=ratings %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

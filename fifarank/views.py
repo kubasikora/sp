@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from fifarank.models import Team, UserRating
 
 class TeamListView(ListView):
@@ -12,6 +12,11 @@ class TeamDetailView(DetailView):
     model = Team
     context_object_name = "team"
     template_name = "team/detail.html"
+
+class TeamAddView(CreateView):
+    model = Team
+    template_name = "team/add.html"
+    fields = "__all__"
 
 class UserRankingList(ListView):
     queryset = UserRating.objects.all()

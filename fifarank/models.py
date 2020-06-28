@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 class Game(models.Model):
-    name = models.CharField(max_length=8, unique=True)
+    name = models.CharField(max_length=8, unique=True, verbose_name="Nazwa gry")
 
     class Meta:
         ordering = ("name",)
@@ -34,8 +34,8 @@ class UserRating(models.Model):
         return f"{self.user}: {self.value}"
 
 class Country(models.Model):
-    name = models.CharField(max_length=30)
-    code = models.CharField(max_length=5)
+    name = models.CharField(max_length=30, verbose_name="Nazwa kraju")
+    code = models.CharField(max_length=5, verbose_name="Kod identyfikacyjny")
 
     class Meta:
         ordering = ("name",)
@@ -45,10 +45,10 @@ class Country(models.Model):
         return f"{self.code}"
 
 class League(models.Model):
-    name = models.CharField(max_length=30)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="leagues")
-    level = models.PositiveIntegerField()
-    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="leagues")
+    name = models.CharField(max_length=30, verbose_name="Nazwa ligi")
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="leagues", verbose_name="Kraj")
+    level = models.PositiveIntegerField(verbose_name="Poziom rozgrywkowy")
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="leagues", verbose_name="Gra")
 
     class Meta:
         ordering = ("country", "level")
@@ -57,11 +57,11 @@ class League(models.Model):
         return f"{self.name} ({self.country})"
 
 class Team(models.Model):
-    name = models.CharField(max_length=100)
-    code = models.CharField(max_length=5)
-    league = models.ForeignKey(League, on_delete=models.CASCADE, related_name="teams")
-    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="teams")
-    rating = models.CharField(max_length=3, choices=TeamRating.choices, default=TeamRating.THREE)
+    name = models.CharField(max_length=100, verbose_name="Nazwa drużyny")
+    code = models.CharField(max_length=5, verbose_name="Skrót nazwy")
+    league = models.ForeignKey(League, on_delete=models.CASCADE, related_name="teams", verbose_name="Liga")
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="teams", verbose_name="Gra")
+    rating = models.CharField(max_length=3, choices=TeamRating.choices, default=TeamRating.THREE, verbose_name="Ranking")
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -75,12 +75,12 @@ class Team(models.Model):
 
 class Match(models.Model):
     date = models.DateTimeField(auto_now_add=True)
-    resultHome = models.PositiveIntegerField()
-    resultAway = models.PositiveIntegerField()
-    homeTeam = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="homeTeams")
-    awayTeam = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="awayTeams")
-    homeUser = models.ForeignKey(User, on_delete=models.PROTECT, related_name="homeUsers")
-    awayUser = models.ForeignKey(User, on_delete=models.PROTECT, related_name="awayUsers")
+    resultHome = models.PositiveIntegerField(verbose_name="Wynik gospodarzy")
+    resultAway = models.PositiveIntegerField(verbose_name="Wynik gości")
+    homeTeam = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="homeTeams", verbose_name="Drużyna gospodarzy")
+    awayTeam = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="awayTeams", verbose_name="Drużyna gości")
+    homeUser = models.ForeignKey(User, on_delete=models.PROTECT, related_name="homeUsers", verbose_name="Gospodarz")
+    awayUser = models.ForeignKey(User, on_delete=models.PROTECT, related_name="awayUsers", verbose_name="Gość")
 
     class Meta:
         ordering = ("-date",)

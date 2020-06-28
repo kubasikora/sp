@@ -6,11 +6,13 @@
 <div class="card">
     <div class="card-body">
         <a href="{% url 'fifarank:team_list' %}">Powrót do listy</a>
-        <br/><br/>
-        <h1>{{ team.name }} ({{ team.code }})</h1>
+        <br /><br />
+        <h1>Dodaj nową drużynę</h1>
         <hr/>
-        <h3>Liga: {{ team.league }}</h3>
-        <h3>Rating: {{ team.rating }} Gra: {{ team.game }}</h3>
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+        </form>
     </div>
 </div>
 {% endblock %}

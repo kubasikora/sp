@@ -7,7 +7,7 @@
     <ul class="list-group">
     {% for rating in ratings %}
     <li class="list-group-item">
-        <a href="{% url 'fifarank:user_rating_detail' rating.id %}"><b style="font-size: 20px; margin-right: auto;">{{ rating.user.username }}</b></a>
+        <a href="{% url 'fifarank:user_rating_detail' rating.id %}"><b style="font-size: 20px; margin-right: auto; color: black">{{ rating.user.username }}</b></a>
         <span>{{ rating.value }}</span>
     </li>
     {% endfor %}

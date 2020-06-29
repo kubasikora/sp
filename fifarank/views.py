@@ -37,6 +37,12 @@ class TeamDetailView(DetailView):
     context_object_name = "team"
     template_name = "team/detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        matches = self.object.homeTeams.all() | self.object.awayTeams.all() 
+        context["matches"] = matches.distinct().order_by("-date")[:10]
+        return context
+
 class TeamAddView(CreateView):
     model = Team
     template_name = "team/add.html"

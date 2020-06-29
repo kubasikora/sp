@@ -22,7 +22,6 @@ class LeagueListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         for league in context["object_list"]:
-            # print(League.object)
             league.teams_num = len(league.teams.all())
         return context
 
@@ -47,8 +46,13 @@ class TeamAddView(CreateView):
 class UserRankingList(ListView):
     queryset = UserRating.objects.all()
     context_object_name = "ratings"
-    paginate_by = 100
     template_name = "rating/list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for idx, league in enumerate(context["object_list"]):
+            league.position = idx + 1
+        return context
 
 class UserRankingDetail(DetailView):
     model = UserRating

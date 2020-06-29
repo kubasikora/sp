@@ -14,8 +14,9 @@
                     <ul class="list-group list-group-flush">
                         {% for rating in ratings %}
                         <li class="list-group-item">
-                            <a href="{% url 'fifarank:user_rating_detail' rating.id %}"><b
-                                    style="font-size: 24px; margin-right: auto; color: black">{{ rating.user.username }}</b></a>
+                            <b style="font-size: 24px; margin-right: auto; color: black">{{ rating.position }}.
+                                <a href="{% url 'fifarank:user_rating_detail' rating.id %}" style="color: black">
+                                    {{ rating.user.username }}</a></b>
                             <span style="font-size: 16px">{{ rating.value }}</span>
                         </li>
                         {% endfor %}
@@ -23,11 +24,6 @@
                 </div>
                 <br />
             </div>
-            <div class="row">
-                <div class="col-12">
-                    {% include "pagination.html" with page=ratings %}
-                </div>
-            </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}

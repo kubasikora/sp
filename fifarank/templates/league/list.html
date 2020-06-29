@@ -20,7 +20,11 @@
                         <div class="card">
                             <div class="card-header" id="heading{{ match.id }}">
                                 <h2 class="mb-0">
-                                    {{ league.name }}
+                                    <a href="{% url 'fifarank:league_detail' league.id %}" style="color: black;">
+                                        <span
+                                            style="font-size: 30px; margin-right: auto; color: black; ">{{ league.name }}
+                                        </span>
+                                    </a>
                                 </h2>
                             </div>
 

@@ -25,6 +25,15 @@ class LeagueListView(ListView):
             league.teams_num = len(league.teams.all())
         return context
 
+class LeagueDetailView(DetailView):
+    model = League
+    context_object_name = "league"
+    template_name = "league/detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["teams"] = context["league"].teams.all()
+        return context
 
 class TeamListView(ListView):
     queryset = Team.objects.all()

@@ -1,0 +1,60 @@
+{% extends "fifarank.html" %}
+
+{% block content %}
+<div class="card" style="margin-bottom: 1rem;">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h1>Ostatnie spotkania</h1>
+                </div>
+                <div class="col-6" style="text-align: right; margin-top: auto;">
+                    <h5 style="color: black;">Dodaj</h5>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col">
+                    <div class="accordion" id="accordionExample">
+                        {% for match in matches %}
+                        <div class="card">
+                            <div class="card-header" id="heading{{ match.id }}">
+                                <h2 class="mb-0" style="text-align: center;">
+                                    {{ match.homeUser }} {{ match.resultHome}} - {{ match.resultAway }}
+                                    {{ match.awayUser }}
+                                </h2>
+                            </div>
+
+                            <div id="{{ match.id }}" class="collapse show" aria-labelledby="heading{{ match.id }}"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-6" style="text-align: right;">
+                                                {{ match.homeTeam }} <br />
+                                                {{ match.homeTeam.league }} <br />
+                                                Liczba gwiazdek: {{ match.homeTeam.rating }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ match.awayTeam }} <br />
+                                                {{ match.awayTeam.league }} <br />
+                                                Liczba gwiazdek: {{ match.awayTeam.rating }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {% include "pagination.html" with page=matches %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="nav-scroller bg-white shadow-sm" style="margin-bottom: 1rem;">
+  <nav class="nav nav-underline">
+    <a class="nav-link" href="{% url 'fifarank:menu' %}">Spotkania</a>
+    <a class="nav-link" href="{% url 'fifarank:user_rating_list' %}">Ranking</a>
+    <a class="nav-link" href="{% url 'fifarank:league_list' %}">Ligi</a>
+    <a class="nav-link" href="{% url 'fifarank:team_list' %}">Drużyny</a>
+  </nav>
+</div>
+
+{% block content %}{% endblock %}
+
+{% endblock %}

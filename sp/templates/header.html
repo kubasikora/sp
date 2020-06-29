@@ -8,10 +8,7 @@
         <ul class="navbar-nav">
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'fifarank:user_rating_list' %}">Ranking</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'fifarank:team_list' %}">Drużyny</a>
+                <a class="nav-link" href="{% url 'fifarank:menu' %}">Fifarank</a>
             </li>
 
             {% if user.is_superuser %}

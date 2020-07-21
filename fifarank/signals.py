@@ -14,9 +14,8 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Match)
 def update_user_rating(sender, instance, created, **kwargs):
     if created:
-        print(instance)
-        print(instance.homeUser.rating)
-        print(instance.awayUser.rating)
         [newPointsForHomeUser, newPointsForAwayUser] = calculateNewPointsValue(instance)
-        print(newPointsForHomeUser)
-        print(newPointsForAwayUser)
+        instance.homeUser.rating.value = newPointsForHomeUser
+        instance.awayUser.rating.value = newPointsForAwayUser
+        instance.homeUser.rating.save()
+        instance.awayUser.rating.save()

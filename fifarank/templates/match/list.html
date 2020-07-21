@@ -9,10 +9,12 @@
                     <h1>Ostatnie spotkania</h1>
                 </div>
                 <div class="col-6" style="text-align: right; margin-top: auto;">
-                    <h5 style="color: black;">Dodaj</h5>
+                    <a href="{% url 'fifarank:match_add' %}">
+                        <h5 style="color: black;">Dodaj</h5>
+                    </a>
                 </div>
             </div>
-            <br/>
+            <br />
             <div class="row">
                 <div class="col">
                     <div class="accordion" id="accordionExample">

@@ -1,6 +1,9 @@
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import TemplateView
 from fifarank.models import Team, UserRating, Match, League
+from django import forms
+from django_select2 import forms as s2forms
+from django.urls import reverse
 
 class FifarankMenuView(TemplateView):
     template_name = "fifarank.html"
@@ -11,6 +14,34 @@ class MatchListView(ListView):
     context_object_name = "matches"
     paginate_by = 10
     template_name = "match/list.html"
+
+class TeamWidget(s2forms.ModelSelect2Widget):
+    search_fields = [
+        "name__icontains"
+    ]
+    empty_label = "Dupa"
+
+class UserWidget(s2forms.ModelSelect2Widget):
+    search_fields = [
+        "username__icontains"
+    ]
+
+class MatchForm(forms.ModelForm):
+    class Meta:
+        model = Match
+        fields = "__all__"
+        widgets = {
+            "homeTeam": TeamWidget,
+            "awayTeam": TeamWidget,
+            "homeUser": UserWidget,
+            "awayUser": UserWidget
+        }
+
+class MatchAddView(CreateView):
+    model = Match
+    template_name = "match/add.html"
+    form_class = MatchForm
+    success_url = "/fifarank/matches"
 
 
 class LeagueListView(ListView):
@@ -34,6 +65,7 @@ class LeagueDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["teams"] = context["league"].teams.all()
         return context
+
 
 class TeamListView(ListView):
     queryset = Team.objects.all()

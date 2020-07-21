@@ -22,5 +22,6 @@ urlpatterns = [
     path('', HomePageView.as_view(), name="home"),
     path('admin/', admin.site.urls),
     path('fifarank/', include('fifarank.urls', namespace='fifarank')),
-    path('accounts/', include('accounts.urls', namespace='accounts'))
+    path('accounts/', include('accounts.urls', namespace='accounts')),
+    path("select2/", include('django_select2.urls'))
 ]

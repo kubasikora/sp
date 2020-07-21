@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.contrib.auth.models import User
 
@@ -57,10 +58,10 @@ class League(models.Model):
         return f"{self.name} ({self.country})"
 
 class Team(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="teams", verbose_name="Gra")
     name = models.CharField(max_length=100, verbose_name="Nazwa drużyny")
     code = models.CharField(max_length=5, verbose_name="Skrót nazwy")
     league = models.ForeignKey(League, on_delete=models.CASCADE, related_name="teams", verbose_name="Liga")
-    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="teams", verbose_name="Gra")
     rating = models.CharField(max_length=3, choices=TeamRating.choices, default=TeamRating.THREE, verbose_name="Ranking")
     created = models.DateTimeField(auto_now_add=True)
 
@@ -73,8 +74,17 @@ class Team(models.Model):
     def get_absolute_url(self):
         return reverse('fifarank:team_detail', args=[self.pk])
 
+    def save(self, *args, **kwargs):
+        if self.game != self.league.game:
+            raise ValidationError("League's game version is different from given")
+        if self.game != self.league.game:
+            raise ValidationError("League's game version is different from given")
+
+        super(Team, self).save(*args, **kwargs)
+
 class Match(models.Model):
     date = models.DateTimeField(auto_now_add=True)
+    game = models.ForeignKey(Game, on_delete=models.PROTECT, related_name="games", verbose_name="Gra")
     resultHome = models.PositiveIntegerField(verbose_name="Wynik gospodarzy")
     resultAway = models.PositiveIntegerField(verbose_name="Wynik gości")
     homeTeam = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="homeTeams", verbose_name="Drużyna gospodarzy")
@@ -85,6 +95,14 @@ class Match(models.Model):
     class Meta:
         ordering = ("-date",)
         verbose_name_plural = "Matches"
+
+    def save(self, *args, **kwargs):
+        if self.game != self.homeTeam.game:
+            raise ValidationError("Home team's game version is different from given")
+        if self.game != self.awayTeam.game:
+            raise ValidationError("Away team's game version is different from given")
+
+        super(Match, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.homeUser} vs {self.awayUser} ({self.resultHome}:{self.resultAway})"

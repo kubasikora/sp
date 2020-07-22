@@ -19,7 +19,7 @@ class TeamWidget(s2forms.ModelSelect2Widget):
     search_fields = [
         "name__icontains"
     ]
-    empty_label = "Dupa"
+    empty_label = "Drużyna"
 
 class UserWidget(s2forms.ModelSelect2Widget):
     search_fields = [
@@ -88,8 +88,7 @@ class TeamAddView(CreateView):
     model = Team
     template_name = "team/add.html"
     fields = "__all__"
-
-
+    
 class UserRankingList(ListView):
     queryset = UserRating.objects.all()
     context_object_name = "ratings"

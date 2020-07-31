@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import TemplateView
 from fifarank.models import Team, UserRating, Match, League
+from django.contrib.auth.models import User
 from django import forms
 from django.urls import reverse
 from dal import autocomplete
@@ -22,7 +23,9 @@ class MatchAddView(CreateView):
             fields = "__all__"
             widgets = {
                 "homeTeam": autocomplete.ModelSelect2(url="fifarank:team_autocomplete", forward=("game",)),
-                "awayTeam": autocomplete.ModelSelect2(url="fifarank:team_autocomplete", forward=("game",))
+                "awayTeam": autocomplete.ModelSelect2(url="fifarank:team_autocomplete", forward=("game",)),
+                "homeUser": autocomplete.ModelSelect2(url="fifarank:user_autocomplete"),
+                "awayUser": autocomplete.ModelSelect2(url="fifarank:user_autocomplete")
             }
 
     model = Match
@@ -64,7 +67,7 @@ class LeagueLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
             qs = qs.filter(game_id=gameFK)
         if leagueQuery:
             qs = qs.filter(name__startswith=leagueQuery)
-        return qs
+        return qs.all()
 
 
 class TeamListView(ListView):
@@ -95,7 +98,7 @@ class TeamLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
             qs = qs.filter(game_id=gameFK)
         if teamQuery:
             qs = qs.filter(name__startswith=teamQuery)
-        return qs
+        return qs.all()
 
 class TeamAddView(CreateView):
     class TeamForm(forms.ModelForm):
@@ -134,3 +137,12 @@ class UserRankingDetail(DetailView):
         context["matches"] = matches.distinct().order_by("-date")[:10]
         return context
 
+class UserLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
+    model = User
+
+    def get_queryset(self):
+        qs = User.objects
+        userQuery = self.q
+        if userQuery:
+            qs = qs.filter(username__startswith=userQuery)
+        return qs.all()

@@ -75,8 +75,8 @@ class Team(models.Model):
 class Match(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     game = models.ForeignKey(Game, on_delete=models.PROTECT, related_name="games", verbose_name="Gra")
-    resultHome = models.PositiveIntegerField(verbose_name="Wynik gospodarzy")
-    resultAway = models.PositiveIntegerField(verbose_name="Wynik gości")
+    resultHome = models.PositiveIntegerField(verbose_name="Wynik gospodarzy", default=0)
+    resultAway = models.PositiveIntegerField(verbose_name="Wynik gości",  default=0)
     homeTeam = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="homeTeams", verbose_name="Drużyna gospodarzy")
     awayTeam = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="awayTeams", verbose_name="Drużyna gości")
     homeUser = models.ForeignKey(User, on_delete=models.PROTECT, related_name="homeUsers", verbose_name="Gospodarz")

@@ -9,6 +9,7 @@ from fifarank.models import League, Team
 app_name = "fifarank"
 
 urlpatterns = [
+    # main view
     path("", login_required(views.MatchListView.as_view()), name="menu"),
     # match views
     path("matches/", login_required(views.MatchListView.as_view()), name="match_list"),
@@ -24,5 +25,6 @@ urlpatterns = [
     path("teams/autocomplete/", login_required(views.TeamLinkedDataAutocompleteView.as_view()), name="team_autocomplete"),
     # ranking views
     path("ranking", login_required(views.UserRankingList.as_view()), name="user_rating_list"),
-    path("ranking/<str:pk>", login_required(views.UserRankingDetail.as_view()), name="user_rating_detail")
+    path("ranking/<str:pk>", login_required(views.UserRankingDetail.as_view()), name="user_rating_detail"),
+    path("ranking/autocomplete/", login_required(views.UserLinkedDataAutocompleteView.as_view()), name="user_autocomplete")
 ]

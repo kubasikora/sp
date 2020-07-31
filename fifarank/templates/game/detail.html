@@ -4,22 +4,22 @@
 <div class="card">
     <div class="card-body">
         <div class="container">
-            <a href="{% url 'fifarank:team_list' %}">Powrót do listy</a>
+            <a href="{% url 'fifarank:game_list' %}">Powrót do listy</a>
             <br /><br />
-            <h1>{{ team.name }} ({{ team.code }})</h1>
+            <h1>{{ game.name }} </h1>
             <hr />
-            <h3>Liga: {{ team.league }}</h3>
-            <h3>Liczba gwiazdek: {{ team.rating }}</h3>
-            <h3>Gra: {{ team.game }}</h3>
+            <h3>Liczba lig: {{ leagues_count }}</h3>
+            <h3>Liczba drużyn: {{ teams_count }}</h3>
+            <h3>Zagranych spotkań: {{ matches_count }}</h3>
             <br />
             <h3>Ostatnie spotkania:</h3>
             <br />
             <div class="accordion" id="accordionExample">
-                {% for match in matches %}
+                {% for match in last_matches %}
                 <div class="card">
                     <div class="card-header" id="heading{{ match.id }}">
                         <h2 class="mb-0" style="text-align: center;">
-                            {{ match.homeUser }} {{ match.resultHome }} - {{ match.resultAway }}
+                            {{ match.homeUser }} {{ match.resultHome}} - {{ match.resultAway }}
                             {{ match.awayUser }}
                         </h2>
                     </div>
@@ -28,6 +28,11 @@
                         data-parent="#accordionExample">
                         <div class="card-body">
                             <div class="container">
+                                <div class="row no-gutter">
+                                    <div class="col-md-12" style="text-align: center;">
+                                        {{ match.date }}
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-6" style="text-align: right;">
                                         {{ match.homeTeam }} <br />

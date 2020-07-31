@@ -26,5 +26,8 @@ urlpatterns = [
     # ranking views
     path("ranking", login_required(views.UserRankingList.as_view()), name="user_rating_list"),
     path("ranking/<str:pk>", login_required(views.UserRankingDetail.as_view()), name="user_rating_detail"),
-    path("ranking/autocomplete/", login_required(views.UserLinkedDataAutocompleteView.as_view()), name="user_autocomplete")
+    path("ranking/autocomplete/", login_required(views.UserLinkedDataAutocompleteView.as_view()), name="user_autocomplete"),
+    # game views
+    path("games", login_required(views.GameListView.as_view()), name="game_list"),
+    path("games/<str:pk>", login_required(views.GameDetailView.as_view()), name="game_detail")
 ]

@@ -1,0 +1,50 @@
+{% extends "fifarank.html" %}
+
+{% block content %}
+<div class="card" style="margin-bottom: 1rem;">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h1>Dostępne gry</h1>
+                </div>
+                <div class="col-6" style="text-align: right; margin-top: auto;">
+                    <!-- dodawanie gier -->
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <div class="accordion" id="accordionExample">
+                        {% for game in games %}
+                        <div class="card">
+                            <div class="card-header" id="heading{{ game.id }}">
+                                <h2 class="mb-0">
+                                    <a href="{% url 'fifarank:game_detail' game.id %}" style="color: black;">
+                                        <span
+                                            style="font-size: 30px; margin-right: auto; color: black; "> {{ game.name }}
+                                        </span>
+                                    </a>
+                                   
+                                </h2>
+                            </div>
+
+                            <div id="{{ game.id }}" class="collapse show" aria-labelledby="heading{{ game.id }}"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            Liczba rozegranych gier: {{ game.count }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

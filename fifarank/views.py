@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import TemplateView
-from fifarank.models import Team, UserRating, Match, League
+from django.db.models import Count
+from fifarank.models import Team, UserRating, Match, League, Game
 from django.contrib.auth.models import User
 from django import forms
 from django.urls import reverse
@@ -134,7 +135,9 @@ class UserRankingDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         matches = self.object.user.homeUsers.all() | self.object.user.awayUsers.all() 
-        context["matches"] = matches.distinct().order_by("-date")[:10]
+        distinctMatches = matches.distinct()
+        context["matches"] = distinctMatches.order_by("-date")[:10]
+        context["match_count"] = len(distinctMatches)
         return context
 
 class UserLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
@@ -146,3 +149,29 @@ class UserLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
         if userQuery:
             qs = qs.filter(username__startswith=userQuery)
         return qs.all()
+
+
+class GameListView(ListView):
+    queryset = Game.objects.annotate(count=Count("matches")).order_by("-count").all()
+    context_object_name = "games"
+    template_name = "game/list.html"
+
+class GameDetailView(DetailView):
+    model = Game
+    context_object_name = "game"
+    template_name = "game/detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        leagues = self.object.leagues.all()
+        context["leagues_count"] = len(leagues)
+
+        teams = self.object.teams.all()
+        context["teams_count"] = len(teams)
+
+        matches = self.object.matches.all() 
+        context["matches_count"] = len(matches)
+        context["last_matches"] = matches.distinct().order_by("-date")[:5]
+
+        return context

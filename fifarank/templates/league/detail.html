@@ -3,43 +3,45 @@
 {% block content %}
 <div class="card">
     <div class="card-body">
-        <a href="{% url 'fifarank:league_list' %}">Powrót do listy</a>
-        <br /><br />
-        <h1>{{ league.name }} </h1>
-        <hr />
-        <h3>Kraj pochodzenia: {{ league.country }}</h3>
-        <h3>Poziom rozgrywkowy: {{ league.level }}</h3>
-        <h3>Gra: {{ league.game }}</h3>
-        <br />
-        <h3>Drużyny w lidze:</h3>
-        <br />
-        <div class="accordion" id="accordionExample">
-            {% for team in teams %}
-            <div class="card">
-                <div class="card-header" id="heading{{ match.id }}">
-                    <h2 class="mb-0">
-                        <a href="{% url 'fifarank:team_detail' team.id %}">
-                            <span style="font-size: 24px; margin-right: auto; color: black; ">{{ team.name }}
-                                <i style="font-size:20px">({{ team.code }})</i>
-                            </span>
-                        </a>
-                    </h2>
-                </div>
+        <div class="container">
+            <a href="{% url 'fifarank:league_list' %}">Powrót do listy</a>
+            <br /><br />
+            <h1>{{ league.name }} </h1>
+            <hr />
+            <h3>Kraj pochodzenia: {{ league.country }}</h3>
+            <h3>Poziom rozgrywkowy: {{ league.level }}</h3>
+            <h3>Gra: {{ league.game }}</h3>
+            <br />
+            <h3>Drużyny w lidze:</h3>
+            <br />
+            <div class="accordion" id="accordionExample">
+                {% for team in teams %}
+                <div class="card">
+                    <div class="card-header" id="heading{{ match.id }}">
+                        <h2 class="mb-0">
+                            <a href="{% url 'fifarank:team_detail' team.id %}">
+                                <span style="font-size: 24px; margin-right: auto; color: black; ">{{ team.name }}
+                                    <i style="font-size:20px">({{ team.code }})</i>
+                                </span>
+                            </a>
+                        </h2>
+                    </div>
 
-                <div id="{{ match.id }}" class="collapse show" aria-labelledby="heading{{ match.id }}"
-                    data-parent="#accordionExample">
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-6"> 
-                                    Liczba gwiazdek: {{ team.rating }} <br />
+                    <div id="{{ match.id }}" class="collapse show" aria-labelledby="heading{{ match.id }}"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        Liczba gwiazdek: {{ team.rating }} <br />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>

@@ -7,10 +7,16 @@
         <br /><br />
         <h1>Dodaj nową drużynę</h1>
         <hr/>
+
+        {% load static %}
+
+        {{ form.media.css }}
         <form method="post">{% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Save">
         </form>
     </div>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    {{ form.media }}
 </div>
 {% endblock %}

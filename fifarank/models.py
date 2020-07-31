@@ -34,33 +34,22 @@ class UserRating(models.Model):
     def __str__(self):
         return f"{self.user}: {self.value}"
 
-class Country(models.Model):
-    name = models.CharField(max_length=30, verbose_name="Nazwa kraju")
-    code = models.CharField(max_length=5, verbose_name="Kod identyfikacyjny")
-
-    class Meta:
-        ordering = ("name",)
-        verbose_name_plural = "Countries"
-    
-    def __str__(self):
-        return f"{self.code}"
 
 class League(models.Model):
-    name = models.CharField(max_length=30, verbose_name="Nazwa ligi")
-    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="leagues", verbose_name="Kraj")
+    name = models.CharField(max_length=30, verbose_name="Liga")
     level = models.PositiveIntegerField(verbose_name="Poziom rozgrywkowy")
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="leagues", verbose_name="Gra")
 
     class Meta:
-        ordering = ("country", "level")
+        ordering = ("name", "level")
 
     def __str__(self):
-        return f"{self.name} ({self.country})"
+        return f"{self.name}"
 
 class Team(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="teams", verbose_name="Gra")
-    name = models.CharField(max_length=100, verbose_name="Nazwa drużyny")
-    code = models.CharField(max_length=5, verbose_name="Skrót nazwy")
+    name = models.CharField(max_length=100, verbose_name="Drużyna")
+    code = models.CharField(max_length=5, verbose_name="Skrót")
     league = models.ForeignKey(League, on_delete=models.CASCADE, related_name="teams", verbose_name="Liga")
     rating = models.CharField(max_length=3, choices=TeamRating.choices, default=TeamRating.THREE, verbose_name="Ranking")
     created = models.DateTimeField(auto_now_add=True)

@@ -2,8 +2,8 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import TemplateView
 from fifarank.models import Team, UserRating, Match, League
 from django import forms
-from django_select2 import forms as s2forms
 from django.urls import reverse
+from dal import autocomplete
 
 class FifarankMenuView(TemplateView):
     template_name = "fifarank.html"
@@ -15,29 +15,16 @@ class MatchListView(ListView):
     paginate_by = 10
     template_name = "match/list.html"
 
-class TeamWidget(s2forms.ModelSelect2Widget):
-    search_fields = [
-        "name__icontains"
-    ]
-    empty_label = "Drużyna"
-
-class UserWidget(s2forms.ModelSelect2Widget):
-    search_fields = [
-        "username__icontains"
-    ]
-
-class MatchForm(forms.ModelForm):
-    class Meta:
-        model = Match
-        fields = "__all__"
-        widgets = {
-            "homeTeam": TeamWidget,
-            "awayTeam": TeamWidget,
-            "homeUser": UserWidget,
-            "awayUser": UserWidget
-        }
-
 class MatchAddView(CreateView):
+    class MatchForm(forms.ModelForm):
+        class Meta:
+            model = Match
+            fields = "__all__"
+            widgets = {
+                "homeTeam": autocomplete.ModelSelect2(url="fifarank:team_autocomplete", forward=("game",)),
+                "awayTeam": autocomplete.ModelSelect2(url="fifarank:team_autocomplete", forward=("game",))
+            }
+
     model = Match
     template_name = "match/add.html"
     form_class = MatchForm
@@ -66,6 +53,19 @@ class LeagueDetailView(DetailView):
         context["teams"] = context["league"].teams.all()
         return context
 
+class LeagueLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
+    model = League
+
+    def get_queryset(self):
+        qs = League.objects
+        gameFK = self.forwarded.get('game', None)
+        leagueQuery = self.q
+        if gameFK:
+            qs = qs.filter(game_id=gameFK)
+        if leagueQuery:
+            qs = qs.filter(name__startswith=leagueQuery)
+        return qs
+
 
 class TeamListView(ListView):
     queryset = Team.objects.all()
@@ -84,11 +84,34 @@ class TeamDetailView(DetailView):
         context["matches"] = matches.distinct().order_by("-date")[:10]
         return context
 
+class TeamLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
+    model = Team
+
+    def get_queryset(self):
+        qs = Team.objects
+        gameFK = self.forwarded.get('game', None)
+        teamQuery = self.q
+        if gameFK:
+            qs = qs.filter(game_id=gameFK)
+        if teamQuery:
+            qs = qs.filter(name__startswith=teamQuery)
+        return qs
+
 class TeamAddView(CreateView):
+    class TeamForm(forms.ModelForm):
+        class Meta:
+            model = Team
+            fields = "__all__"
+            widgets = {
+                "league": autocomplete.ModelSelect2(url="fifarank:league_autocomplete", forward=("game",)),
+            }
+
     model = Team
     template_name = "team/add.html"
-    fields = "__all__"
-    
+    form_class = TeamForm
+    success_url = "/fifarank/teams"
+
+
 class UserRankingList(ListView):
     queryset = UserRating.objects.all()
     context_object_name = "ratings"
@@ -110,3 +133,4 @@ class UserRankingDetail(DetailView):
         matches = self.object.user.homeUsers.all() | self.object.user.awayUsers.all() 
         context["matches"] = matches.distinct().order_by("-date")[:10]
         return context
+

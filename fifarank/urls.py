@@ -16,6 +16,7 @@ urlpatterns = [
     path("matches/new", login_required(views.MatchAddView.as_view()), name="match_add"),
     # league views
     path("leagues/", login_required(views.LeagueListView.as_view()), name="league_list"),
+    path("leagues/new", login_required(views.LeagueAddView.as_view()), name="league_add"),    
     path("leagues/<str:pk>", login_required(views.LeagueDetailView.as_view()), name="league_detail"), 
     path("leagues/autocomplete/", login_required(views.LeagueLinkedDataAutocompleteView.as_view()), name="league_autocomplete"),
     # team views

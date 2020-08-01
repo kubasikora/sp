@@ -70,6 +70,12 @@ class LeagueLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
             qs = qs.filter(name__startswith=leagueQuery)
         return qs.all()
 
+class LeagueAddView(CreateView):
+    model = League
+    template_name = "league/add.html"
+    success_url = "/fifarank/leagues"
+    fields = "__all__"
+
 
 class TeamListView(ListView):
     queryset = Team.objects.all()

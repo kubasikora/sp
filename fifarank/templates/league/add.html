@@ -1,0 +1,73 @@
+{% extends "fifarank.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+
+            <a href="{% url 'fifarank:league_list' %}">Powrót</a>
+            <br /><br />
+            <h1>Dodaj nową ligę</h1>
+            <br />
+            {% load static %}
+
+            {{ form.media.css }}
+            <form method="post">
+                {% csrf_token %}
+                <div class="container-fluid">
+                    <div class="row no-gutters">
+                        {{ form.game.label}}: {{ form.game }}
+                    </div>
+                    <br />
+                    <div class="row no-gutters">
+                        <div class="col-md-9">
+                            Nazwa ligi: <br />
+                            {{ form.name }}
+                        </div>
+
+                        <div class="col-md-2 offset-md-1">
+                            Poziom rozgrywkowy: <br />
+                            {{ form.level }}
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+
+
+
+
+        <br />
+        <div style="float:right">
+            <input class="btn btn-outline-dark" type="reset" value="Anuluj" onclick="goBack()">
+            <input class="btn btn-dark" type="submit" value="Dodaj">
+        </div>
+        </form>
+
+    </div>
+</div>
+</div>
+
+
+
+</div>
+<style>
+    #id_level {
+        width: 100%;
+    }
+
+    #id_name {
+        width: 100%;
+    }
+
+
+</style>
+<script>
+    function goBack() {
+        window.location.assign("{% url 'fifarank:league_list' %}");
+    }
+</script>
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+</div>
+{% endblock %}

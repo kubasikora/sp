@@ -36,12 +36,13 @@ class UserRating(models.Model):
 
 
 class League(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=30, verbose_name="Liga")
-    level = models.PositiveIntegerField(verbose_name="Poziom rozgrywkowy")
+    level = models.PositiveIntegerField(verbose_name="Poziom rozgrywkowy", default=1)
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="leagues", verbose_name="Gra")
 
     class Meta:
-        ordering = ("name", "level")
+        ordering = ("-created", "name", "level")
 
     def __str__(self):
         return f"{self.name}"

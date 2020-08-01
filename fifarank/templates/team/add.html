@@ -3,49 +3,51 @@
 {% block content %}
 <div class="card">
     <div class="card-body">
-        <a href="{% url 'fifarank:team_list' %}">Powrót do listy</a>
-        <br /><br />
-        <h1>Dodaj nową drużynę</h1>
-        <hr />
+        <div class="container">
+            <a href="{% url 'fifarank:team_list' %}">Powrót</a>
+            <br /><br />
+            <h1>Dodaj nową drużynę</h1>
+            <hr />
 
-        {% load static %}
+            {% load static %}
 
-        {{ form.media.css }}
-        <form method="post">{% csrf_token %}
-            <div class="container-fluid">
-                <div class="row no-gutters">
-                    {{ form.game.label }} {{ form.game }} <br />
-                    {{ form.name.label }} {{ form.name }}
-                </div>
-                <br />
-                <div class="row no-gutters">
-                    <div class="col-md-3">
-                        {{ form.code.label }} {{ form.code }}
+            {{ form.media.css }}
+            <form method="post">{% csrf_token %}
+                <div class="container-fluid">
+                    <div class="row no-gutters">
+                        {{ form.game.label }} {{ form.game }} <br />
+                        {{ form.name.label }} {{ form.name }}
                     </div>
-                    <div class="col-md-5 offset-md-1">
-                        {{ form.league.label }}<br>{{ form.league }}
+                    <br />
+                    <div class="row no-gutters">
+                        <div class="col-md-3">
+                            {{ form.code.label }} {{ form.code }}
+                        </div>
+                        <div class="col-md-5 offset-md-1">
+                            {{ form.league.label }}<br>{{ form.league }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form.rating.label }}<br />{{ form.rating }}
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        {{ form.rating.label }}<br />{{ form.rating }}
-                    </div>
-                </div>
-                <br />
-                <div class="row no-gutters">
-                    <div class="col">
-                        <div class="float-right">
-                            <input class="btn btn-outline-dark" type="reset" value="Anuluj" onclick="goBack()">
-                            <input class="btn btn-dark" type="submit" value="Dodaj">
+                    <br />
+                    <div class="row no-gutters">
+                        <div class="col">
+                            <div class="float-right">
+                                <input class="btn btn-outline-dark" type="reset" value="Anuluj" onclick="goBack()">
+                                <input class="btn btn-dark" type="submit" value="Dodaj">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
 
-        </form>
+            </form>
+        </div>
+        <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+        {{ form.media }}
     </div>
-    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
-    {{ form.media }}
 </div>
 
 <style>
@@ -59,6 +61,7 @@
 
     select[name="rating"] {
         width: 100%;
+        background-color: white;
     }
 </style>
 <script>

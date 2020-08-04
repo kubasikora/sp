@@ -15,58 +15,7 @@
                 </div>
             </div>
             <br />
-            <div class="row">
-                <div class="col">
-                    <div class="accordion" id="accordionExample">
-                        {% if matches|length == 0 %}
-                        <div>
-                            <p style="text-align: center; color: gray;">Brak rozegranych spotkań</p>
-                        </div>
-                        {% else %}
-                        {% for match in matches %}
-                        <div class="card">
-                            <div class="card-header" id="heading{{ match.id }}">
-                                <h2 class="mb-0" style="text-align: center;">
-                                    {{ match.homeUser }} {{ match.resultHome }} - {{ match.resultAway }}
-                                    {{ match.awayUser }}
-                                </h2>
-                            </div>
-
-                            <div id="{{ match.id }}" class="collapse show" aria-labelledby="heading{{ match.id }}"
-                                data-parent="#accordionExample">
-                                <div class="card-body" style="padding: 0.5em ;">
-                                    <div class="container">
-                                        <div class="row no-gutter">
-                                            <div class="col-md-12" style="text-align: center;">
-                                                Gra: {{ match.game }}, {{ match.date }}
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6" style="text-align: right;">
-                                                {{ match.homeTeam }} <br />
-                                                {{ match.homeTeam.league }} <br />
-                                                Liczba gwiazdek: {{ match.homeTeam.rating }}
-                                            </div>
-                                            <div class="col-6">
-                                                {{ match.awayTeam }} <br />
-                                                {{ match.awayTeam.league }} <br />
-                                                Liczba gwiazdek: {{ match.awayTeam.rating }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            {% include "pagination.html" with page=matches %}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% include "components/matchList.html" with matches=matches show_paginator=True%}
         </div>
     </div>
 </div>

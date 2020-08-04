@@ -26,6 +26,9 @@
                     {{ form.resultHome }} : {{ form.resultAway }}
                 </div>
                 <br />
+                <div class="row justify-content-center align-self-center">
+                    <span style="padding-top: 0.5em">{{ form.inOvertime.label }}:</span> {{ form.inOvertime }}
+                </div>
                 <div class="row">
                     <div class="col-auto mr-auto">
                         <h3>Gospodarz</h3>
@@ -82,6 +85,10 @@
         font-size: 20px;
         width: 80px;
         margin: 0 1em;
+    }
+
+    input[name="inOvertime"] {
+        margin-left: 1em;
     }
 </style>
 <script>

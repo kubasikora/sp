@@ -81,6 +81,7 @@ class Match(models.Model):
     awayTeam = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="awayTeams", verbose_name="Drużyna gości")
     homeUser = models.ForeignKey(User, on_delete=models.PROTECT, related_name="homeUsers", verbose_name="Gospodarz")
     awayUser = models.ForeignKey(User, on_delete=models.PROTECT, related_name="awayUsers", verbose_name="Gość")
+    inOvertime = models.BooleanField(default=False, verbose_name="Po dogrywce")
 
     class Meta:
         ordering = ("-date",)

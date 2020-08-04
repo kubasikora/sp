@@ -1,11 +1,12 @@
 def homeUserWon(match):
-    return match.resultHome > match.resultAway
+    return match.resultHome > match.resultAway or (match.resultHome == match.resultAway and match.resultPKHome > match.resultPKAway)
  
 def awayUserWon(match):
-    return match.resultHome < match.resultAway
+
+    return match.resultHome < match.resultAway or (match.resultHome == match.resultAway and match.resultPKHome < match.resultPKAway)
  
 def drawnMatch(match):
-    return match.resultHome == match.resultAway
+    return match.resultHome == match.resultAway and match.resultPKHome == match.resultPKAway
 
 def getUserRecord(matchList, user):
     won = 0

@@ -25,9 +25,22 @@
                 <div class="row justify-content-center align-self-center">
                     {{ form.resultHome }} : {{ form.resultAway }}
                 </div>
+                <div class="row justify-content-center align-self-center" style="margin-top: 1rem;">
+                    <div class="col-md-6" style="text-align: right;">
+                        <span style="padding-right: 0.5em;">{{ form.inOvertime.label }}</span> {{ form.inOvertime }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.inPKs }}<span style="padding-left: 0.5em;">{{ form.inPKs.label }}</span>
+                    </div>
+                </div>
                 <br />
-                <div class="row justify-content-center align-self-center">
-                    <span style="padding-top: 0.5em">{{ form.inOvertime.label }}:</span> {{ form.inOvertime }}
+                <div id="pks" class="is-visible">
+                    <div class="row justify-content-center align-self-center">
+                        <h4>Wynik rzutów karnych:</h3>
+                    </div>
+                    <div class="row justify-content-center align-self-center">
+                        {{ form.resultPKHome }} : {{ form.resultPKAway }}
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-auto mr-auto">
@@ -87,16 +100,22 @@
         margin: 0 1em;
     }
 
-    input[name="inOvertime"] {
-        margin-left: 1em;
+    .is-visible {
+        display: none;
     }
 </style>
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 <script>
     function goBack() {
         window.location.assign("{% url 'fifarank:match_list' %}");
     }
+    $("#id_inPKs").change(function () {
+        $("#pks").toggleClass("is-visible");
+        $("#id_resultPKHome").val(0);
+        $("#id_resultPKAway").val(0);
+    });
+
 </script>
-<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 {{ form.media }}
 </div>
 {% endblock %}

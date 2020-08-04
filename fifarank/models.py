@@ -82,16 +82,23 @@ class Match(models.Model):
     homeUser = models.ForeignKey(User, on_delete=models.PROTECT, related_name="homeUsers", verbose_name="Gospodarz")
     awayUser = models.ForeignKey(User, on_delete=models.PROTECT, related_name="awayUsers", verbose_name="Gość")
     inOvertime = models.BooleanField(default=False, verbose_name="Po dogrywce")
+    inPKs = models.BooleanField(default=False, verbose_name="Po karnych")
+    resultPKHome = models.PositiveIntegerField(verbose_name="Wynik gospodarzy w karnych", default=0)
+    resultPKAway = models.PositiveIntegerField(verbose_name="Wynik gości w karnych",  default=0)
 
     class Meta:
         ordering = ("-date",)
         verbose_name_plural = "Matches"
 
     def save(self, *args, **kwargs):
+        if self.inPKs and self.inOvertime:
+            raise ValidationError("Gra nie może być zakończona na dwa sposoby")
+        if self.inPKs and (self.resultHome != self.resultAway):
+            raise ValidationError("Gra może być zakończona poprzez karne tylko po remisie")
         if self.game != self.homeTeam.game:
-            raise ValidationError("Home team's game version is different from given")
+            raise ValidationError("Wersja gry drużyny domowej jest inna niż podana")
         if self.game != self.awayTeam.game:
-            raise ValidationError("Away team's game version is different from given")
+            raise ValidationError("Wersja gry drużyny wyjazdowej jest inna niż podana")
 
         super(Match, self).save(*args, **kwargs)
 

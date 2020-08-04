@@ -19,6 +19,13 @@
                     data-parent="#accordionExample">
                     <div class="card-body" style="padding: 0.5em ;">
                         <div class="container">
+                            {% if match.inPKs %}
+                            <div class="row no-gutter">
+                                <div class="col-md-12" style="text-align: center; color: gray; padding-bottom: 3px">
+                                    Po rzutach karnych ({{ match.resultPKHome}} : {{ match.resultPKAway }})
+                                </div>
+                            </div>
+                            {% endif %}
                             {% if match.inOvertime %}
                             <div class="row no-gutter">
                                 <div class="col-md-12" style="text-align: center; color: gray; padding-bottom: 3px">

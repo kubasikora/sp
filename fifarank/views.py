@@ -1,11 +1,13 @@
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import TemplateView
 from django.db.models import Count
-from fifarank.models import Team, UserRating, Match, League, Game
 from django.contrib.auth.models import User
 from django import forms
 from django.urls import reverse
+from fifarank.models import Team, UserRating, Match, League, Game
+from fifarank.logic.matchRecord import getUserRecord
 from dal import autocomplete
+
 
 class FifarankMenuView(TemplateView):
     template_name = "fifarank.html"
@@ -140,10 +142,15 @@ class UserRankingDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         matches = self.object.user.homeUsers.all() | self.object.user.awayUsers.all() 
         distinctMatches = matches.distinct()
         context["matches"] = distinctMatches.order_by("-date")[:10]
         context["match_count"] = len(distinctMatches)
+
+        (w,d,l) = getUserRecord(distinctMatches.all(), self.object.user)
+        context["user_record"] = f"{w}W - {d}D - {l}L"
+
         return context
 
 class UserLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):

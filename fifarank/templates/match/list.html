@@ -18,11 +18,16 @@
             <div class="row">
                 <div class="col">
                     <div class="accordion" id="accordionExample">
+                        {% if matches|length == 0 %}
+                        <div>
+                            <p style="text-align: center; color: gray;">Brak rozegranych spotkań</p>
+                        </div>
+                        {% else %}
                         {% for match in matches %}
                         <div class="card">
                             <div class="card-header" id="heading{{ match.id }}">
                                 <h2 class="mb-0" style="text-align: center;">
-                                    {{ match.homeUser }} {{ match.resultHome}} - {{ match.resultAway }}
+                                    {{ match.homeUser }} {{ match.resultHome }} - {{ match.resultAway }}
                                     {{ match.awayUser }}
                                 </h2>
                             </div>
@@ -53,6 +58,7 @@
                             </div>
                         </div>
                         {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="row">
                         <div class="col-12">

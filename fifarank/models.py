@@ -50,7 +50,6 @@ class League(models.Model):
 class Team(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="teams", verbose_name="Gra")
     name = models.CharField(max_length=100, verbose_name="Drużyna")
-    code = models.CharField(max_length=5, verbose_name="Skrót")
     league = models.ForeignKey(League, on_delete=models.CASCADE, related_name="teams", verbose_name="Liga")
     rating = models.CharField(max_length=3, choices=TeamRating.choices, default=TeamRating.THREE, verbose_name="Ranking")
     created = models.DateTimeField(auto_now_add=True)
@@ -60,7 +59,7 @@ class Team(models.Model):
         unique_together = ("name", "league")
 
     def __str__(self):
-        return f"{self.name} ({self.code})"
+        return f"{self.name}"
 
     def get_absolute_url(self):
         return reverse('fifarank:team_detail', args=[self.pk])

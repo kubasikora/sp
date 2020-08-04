@@ -15,19 +15,16 @@
             <form method="post">{% csrf_token %}
                 <div class="container-fluid">
                     <div class="row no-gutters">
-                        {{ form.game.label }} {{ form.game }} <br />
-                        {{ form.name.label }} {{ form.name }}
+                        {{ form.game.label }}: {{ form.game }} <br />
+                        Nazwa drużyny: {{ form.name }}
                     </div>
                     <br />
                     <div class="row no-gutters">
-                        <div class="col-md-3">
-                            {{ form.code.label }} {{ form.code }}
+                        <div class="col-md-8">
+                            {{ form.league.label }}:<br>{{ form.league }}
                         </div>
-                        <div class="col-md-5 offset-md-1">
-                            {{ form.league.label }}<br>{{ form.league }}
-                        </div>
-                        <div class="col-md-3">
-                            {{ form.rating.label }}<br />{{ form.rating }}
+                        <div class="col-md-3 offset-md-1">
+                            {{ form.rating.label }}:<br />{{ form.rating }}
                         </div>
                     </div>
                     <br />
@@ -52,10 +49,6 @@
 
 <style>
     input[name="name"] {
-        width: 100%;
-    }
-
-    input[name="code"] {
         width: 100%;
     }
 

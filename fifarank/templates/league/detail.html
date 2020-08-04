@@ -8,21 +8,23 @@
             <br /><br />
             <h1>{{ league.name }} </h1>
             <hr />
-            <h3>Kraj pochodzenia: {{ league.country }}</h3>
             <h3>Poziom rozgrywkowy: {{ league.level }}</h3>
             <h3>Gra: {{ league.game }}</h3>
             <br />
             <h3>Drużyny w lidze:</h3>
             <br />
             <div class="accordion" id="accordionExample">
+                {% if teams|length == 0 %}
+                <div>
+                    <p style="text-align: center; color: gray;">Brak dodanych drużyn</p>
+                </div>
+                {% else %}
                 {% for team in teams %}
                 <div class="card">
                     <div class="card-header" id="heading{{ match.id }}">
                         <h2 class="mb-0">
                             <a href="{% url 'fifarank:team_detail' team.id %}">
-                                <span style="font-size: 24px; margin-right: auto; color: black; ">{{ team.name }}
-                                    <i style="font-size:20px">({{ team.code }})</i>
-                                </span>
+                                <span style="font-size: 24px; margin-right: auto; color: black; ">{{ team.name }}</span>
                             </a>
                         </h2>
                     </div>
@@ -41,6 +43,7 @@
                     </div>
                 </div>
                 {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
         <div class="container">
             <a href="{% url 'fifarank:team_list' %}">Powrót</a>
             <br /><br />
-            <h1>{{ team.name }} ({{ team.code }})</h1>
+            <h1>{{ team.name }}</h1>
             <hr />
             <h3>Liga: {{ team.league }}</h3>
             <h3>Liczba gwiazdek: {{ team.rating }}</h3>
@@ -15,6 +15,11 @@
             <h3>Ostatnie spotkania:</h3>
             <br />
             <div class="accordion" id="accordionExample">
+                {% if matches|length == 0 %}
+                <div>
+                    <p style="text-align: center; color: gray;">Brak rozegranych spotkań</p>
+                </div>
+                {% else %}
                 {% for match in matches %}
                 <div class="card">
                     <div class="card-header" id="heading{{ match.id }}">
@@ -45,6 +50,7 @@
                     </div>
                 </div>
                 {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

@@ -11,6 +11,11 @@
             <h5 style="color: gray">Zagranych spotkań: {{ match_count }}</h5>
             <hr />
             <h3>Ostatnie spotkania:</h3>
+            {% if matches|length == 0 %}
+                <div>
+                    <p style="text-align: center; color: gray;">Brak rozegranych spotkań</p>
+                </div>
+            {% else %}
             {% for match in matches %}
             <div class="card">
                 <div class="card-header" id="heading{{ match.id }}">
@@ -41,6 +46,7 @@
                 </div>
             </div>
             {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>

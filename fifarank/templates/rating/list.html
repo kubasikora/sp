@@ -11,7 +11,11 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush">{% if ratings|length == 0 %}
+                        <div>
+                            <p style="text-align: center; color: gray;">Brak dodanych użytkowników</p>
+                        </div>
+                        {% else %}
                         {% for rating in ratings %}
                         <li class="list-group-item">
                             <b style="font-size: 24px; margin-right: auto; color: black">{{ rating.position }}.
@@ -20,6 +24,7 @@
                             <span style="font-size: 16px">{{ rating.value }}</span>
                         </li>
                         {% endfor %}
+                        {% endif %}
                     </ul>
                 </div>
                 <br />

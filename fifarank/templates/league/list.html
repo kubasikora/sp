@@ -18,6 +18,11 @@
                 <div class="col">
                     <ul class="list-group list-group-flush">
                         <hr />
+                        {% if leagues|length == 0 %}
+                        <div>
+                            <p style="text-align: center; color: gray;">Brak dodanych lig</p>
+                        </div>
+                        {% else %}
                         {% for league in leagues %}
                         <div class="card">
                             <div class="card-header" id="heading{{ match.id }}">
@@ -36,7 +41,6 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-12">
-                                                Kraj pochodzenia: {{ league.country }} <br />
                                                 Poziom rozgrywkowy: {{ league.level }} <br />
                                                 Liczba drużyn: {{ league.teams_num }} <br />
                                                 Gra: {{ league.game }}
@@ -47,6 +51,7 @@
                             </div>
                         </div>
                         {% endfor %}
+                        {% endif %}
                     </ul>
                 </div>
                 <br />

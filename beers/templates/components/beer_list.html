@@ -1,0 +1,29 @@
+<ul class="list-group list-group-flush">
+    <hr />
+    {% if beers|length == 0 %}
+    <div>
+        <p style="text-align: center; color: gray;">Brak dodanych piwek</p>
+    </div>
+    {% else %}
+    <table class="table table-responsive-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Piwkodawca</th>
+                <th scope="col">Piwkobiorca</th>
+                <th scope="col">Data</th>
+                <th style="width: 10em" scope="col">Czy oddane?</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for beer in beers %}
+            <tr>
+                <th scope="row"><b>{{ beer.loaner }}</b></th>
+                <td><b>{{ beer.loanee }}</b></td>
+                <td>{{ beer.date|date:"d.m.y H:i" }}</td>
+                <td ><span class="badge badge-primary" style="vertical-align: top;">{% if beer.is_given_back %} Tak {% else %} Nie {% endif %}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</ul>

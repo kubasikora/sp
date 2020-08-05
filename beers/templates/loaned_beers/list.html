@@ -16,18 +16,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <ul class="list-group list-group-flush">
-                        <hr />
-                        {% if beers|length == 0 %}
-                        <div>
-                            <p style="text-align: center; color: gray;">Brak dodanych piwek</p>
-                        </div>
-                        {% else %}
-                        {% for beer in beers %}
-                        <p><b>{{ beer.loaner }}</b> -> <b>{{ beer.loanee }}</b> z {{ beer.date|date:"d.m.y H:i" }} -- Oddane? {% if beer.is_given_back %} Tak {% else %} Nie {% endif %}</p>
-                        {% endfor %}
-                        {% endif %}
-                    </ul>
+                    {% include "components/beer_list.html" with beers=beers %}
                 </div>
                 <br />
             </div>

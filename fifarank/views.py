@@ -27,8 +27,8 @@ class MatchAddView(CreateView):
             widgets = {
                 "homeTeam": autocomplete.ModelSelect2(url="fifarank:team_autocomplete", forward=("game",)),
                 "awayTeam": autocomplete.ModelSelect2(url="fifarank:team_autocomplete", forward=("game",)),
-                "homeUser": autocomplete.ModelSelect2(url="fifarank:user_autocomplete"),
-                "awayUser": autocomplete.ModelSelect2(url="fifarank:user_autocomplete")
+                "homeUser": autocomplete.ModelSelect2(url="user_autocomplete"),
+                "awayUser": autocomplete.ModelSelect2(url="user_autocomplete")
             }
 
     model = Match

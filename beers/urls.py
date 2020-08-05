@@ -8,5 +8,6 @@ urlpatterns = [
     # main view
     path("", login_required(views.BeerListView.as_view()), name="menu"),
     # loaned beer views
-    path("loanslist", login_required(views.BeerListView.as_view()), name="loanslist")
+    path("loans", login_required(views.BeerListView.as_view()), name="loan_list"),
+    path("loans/new", login_required(views.BeerAddView.as_view()), name="loan_add")
 ]

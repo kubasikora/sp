@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -15,3 +16,8 @@ class LoanedBeer(models.Model):
 
     def __str__(self):
         return f"Piwko od {self.loaner} dla {self.loanee}"
+
+    def save(self, *args, **kwargs):
+        if self.loanee == self.loaner:
+            raise ValidationError("Nie można pożyczać piwek samemu sobie")
+        super(LoanedBeer, self).save(*args, **kwargs)

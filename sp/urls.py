@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
 from django.conf.urls import url
-from sp.views import HomePageView
+from django.contrib.auth.decorators import login_required
+from sp import views
 
 urlpatterns = [
-    path('', HomePageView.as_view(), name="home"),
+    path('', views.HomePageView.as_view(), name="home"),
+    path("user/autocomplete/", login_required(views.UserLinkedDataAutocompleteView.as_view()), name="user_autocomplete"),
     path('admin/', admin.site.urls),
     path('fifarank/', include('fifarank.urls', namespace='fifarank')),
     path('accounts/', include('accounts.urls', namespace='accounts')),

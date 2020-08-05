@@ -2,83 +2,85 @@
 
 {% block main %}
 <div class="nav-scroller bg-white shadow-sm" style="margin-bottom: 1rem;">
-  <nav class="nav nav-underline">
-    <a class="nav-link" disabled href="{% url 'beers:loan_list' %}">Lista dłużników</a>
-  </nav>
+    <nav class="nav nav-underline">
+        <a class="nav-link" disabled href="{% url 'beers:loan_list' %}">Lista dłużników</a>
+        <a class="nav-link" disabled href="{% url 'beers:loaner' %}">Panel piwkodawcy</a>
+        <a class="nav-link" disabled href="{% url 'beers:loanee' %}">Panel piwkobiorcy</a>
+    </nav>
 </div>
 
 {% load static %}
 <div style="margin-bottom: 2em;">
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 </div>
 
 <style>
-  .select2-dropdown.select2-dropdown--below {
-    width: 100% !important;
-  }
+    .select2-dropdown.select2-dropdown--below {
+        width: 100% !important;
+    }
 
-  .select2-container--default .select2-selection--single {
-    padding: .3em 1em .5em .4em;
-    width: 100%;
-    font-size: 1.2em;
-    box-sizing: border-box;
-    border: 1px solid #aaa;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
-    border-radius: .3em;
-    height: 2.1em;
-    line-height: 1;
-    position: relative;
-  }
+    .select2-container--default .select2-selection--single {
+        padding: .3em 1em .5em .4em;
+        width: 100%;
+        font-size: 1.2em;
+        box-sizing: border-box;
+        border: 1px solid #aaa;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+        border-radius: .3em;
+        height: 2.1em;
+        line-height: 1;
+        position: relative;
+    }
 
-  .select2-selection{
-    width: 100%;
-    font-size: 1.2em;
-    line-height: 1;
-    height: 100%;
-    box-sizing: border-box;
-    border: 1px solid #aaa;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
-    border-radius: .3em;
-    position: relative;
-  }
+    .select2-selection {
+        width: 100%;
+        font-size: 1.2em;
+        line-height: 1;
+        height: 100%;
+        box-sizing: border-box;
+        border: 1px solid #aaa;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+        border-radius: .3em;
+        position: relative;
+    }
 
-  .select2-container--default .select2-selection--single .select2-selection__arrow {
-    color: #fff;
-    font-size: 1.3em;
-    padding: .6em;
-    height: 27px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 20px;
-  }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        color: #fff;
+        font-size: 1.3em;
+        padding: .6em;
+        height: 27px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 20px;
+    }
 
-  select {
-    box-sizing: border-box;
-    border: 1px solid #aaa;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
-    border-radius: .3em;
-    padding: .6em 1em .5em .8em;
-    height: 2.5em;
-  }
+    select {
+        box-sizing: border-box;
+        border: 1px solid #aaa;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+        border-radius: .3em;
+        padding: .6em 1em .5em .8em;
+        height: 2.5em;
+    }
 
-  input[type="text"] {
-    box-sizing: border-box;
-    border: 1px solid #aaa;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
-    border-radius: .3em;
-    padding: .6em 1em .5em .8em;
-    height: 2.5em;
-  }
+    input[type="text"] {
+        box-sizing: border-box;
+        border: 1px solid #aaa;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+        border-radius: .3em;
+        padding: .6em 1em .5em .8em;
+        height: 2.5em;
+    }
 
-  input[type="number"] {
-    box-sizing: border-box;
-    border: 1px solid #aaa;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
-    border-radius: .3em;
-    padding: .6em 1em .5em .8em;
-    height: 2.5em;
-  }
+    input[type="number"] {
+        box-sizing: border-box;
+        border: 1px solid #aaa;
+        box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+        border-radius: .3em;
+        padding: .6em 1em .5em .8em;
+        height: 2.5em;
+    }
 </style>
 
 {% endblock %}

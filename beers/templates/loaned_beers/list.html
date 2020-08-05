@@ -1,0 +1,42 @@
+{% extends "beers.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h1>Lista dłużników</h1>
+                </div>
+                <div class="col-6" style="text-align: right; margin-top: auto;">
+                    <a href="{% url 'beers:menu' %}">
+                        <h5 style="color: black;">Dodaj</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <hr />
+                        {% if beers|length == 0 %}
+                        <div>
+                            <p style="text-align: center; color: gray;">Brak dodanych piwek</p>
+                        </div>
+                        {% else %}
+                        {% for beer in beers %}
+                        <p><b>{{ beer.loaner }}</b> -> <b>{{ beer.loanee }}</b> z {{ beer.date|date:"d.m.y H:i" }} -- Oddane? {% if beer.is_given_back %} Tak {% else %} Nie {% endif %}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    {% include "pagination.html" with page=beers %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

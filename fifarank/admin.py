@@ -1,7 +1,6 @@
 from django.contrib import admin
 from fifarank.models import *
 
-# Register your models here.
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
     list_display = ("name",)

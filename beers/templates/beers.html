@@ -3,11 +3,7 @@
 {% block main %}
 <div class="nav-scroller bg-white shadow-sm" style="margin-bottom: 1rem;">
   <nav class="nav nav-underline">
-    <a class="nav-link" href="{% url 'fifarank:match_list' %}">Spotkania</a>
-    <a class="nav-link" href="{% url 'fifarank:user_rating_list' %}">Ranking</a>
-    <a class="nav-link" href="{% url 'fifarank:league_list' %}">Ligi</a>
-    <a class="nav-link" href="{% url 'fifarank:team_list' %}">Drużyny</a>
-    <a class="nav-link" href="{% url 'fifarank:game_list' %}">Gry</a>
+    <a class="nav-link" disabled href="{% url 'beers:loanslist' %}">Lista dłużników</a>
   </nav>
 </div>
 
@@ -82,50 +78,6 @@
     border-radius: .3em;
     padding: .6em 1em .5em .8em;
     height: 2.5em;
-  }
-
-  select[name="game"] {
-    margin: auto;
-    display: block;
-    font-size: 16px;
-    font-family: sans-serif;
-    font-weight: 400;
-    color: #444;
-    line-height: 1;
-    padding: .6em 1em .5em .8em;
-    width: 100%;
-    margin-left: auto;
-    max-width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #aaa;
-    box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
-    border-radius: .3em;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    height: 2.5em;
-    appearance: none;
-    background-color: #fff;
-    background-position: right .7em top 50%, 0 0;
-  }
-
-  select[name="game"]::-ms-expand {
-    display: none;
-  }
-
-  select[name="game"]:hover {
-    border-color: #888;
-  }
-
-  select[name="game"]:focus {
-    border-color: #aaa;
-    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
-    box-shadow: 0 0 0 3px -moz-mac-focusring;
-    color: #222;
-    outline: none;
-  }
-
-  select[name="game"] option {
-    font-weight: normal;
   }
 </style>
 

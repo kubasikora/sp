@@ -25,6 +25,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', '0dsadasf')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+INTERNAL_IPS = ('127.0.0.1')
+
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -39,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'fifarank',
-    'accounts'
+    'accounts',
+    'beers'
 ]
 
 MIDDLEWARE = [
@@ -54,8 +57,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sp.urls'
 
-LOGIN_REDIRECT_URL = '/fifarank/ranking'
-LOGOUT_REDIRECT_URL = '/fifarank/teams'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login'
 
 TEMPLATES = [
     {

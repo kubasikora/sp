@@ -1,10 +1,6 @@
 from django.urls import path
-from django.conf.urls import url
 from fifarank import views
 from django.contrib.auth.decorators import login_required
-from django.conf.urls import url
-from dal import autocomplete
-from fifarank.models import League, Team
 
 app_name = "fifarank"
 

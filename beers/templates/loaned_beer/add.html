@@ -16,12 +16,19 @@
                 {% csrf_token %}
                 <div class="container-fluid">
                     <div class="row">
-                        <span style="margin-right: 1rem; margin-top: 0.5rem;">{{ form.loaner.label }}:</span>{{ form.loaner }}
+                        <span
+                            style="margin-right: 1rem; margin-top: 0.5rem;">{{ form.loaner.label }}:</span>{{ form.loaner }}
+                    </div>
+                    <br />
+                    <div class="row">
+                        <span
+                            style="margin-right: 1rem; margin-top: 0.5rem;">{{ form.loanee.label }}:</span>{{ form.loanee }}
                     </div>
                     <br/>
                     <div class="row">
-                        <span style="margin-right: 1rem; margin-top: 0.5rem;">{{ form.loanee.label }}:</span>{{ form.loanee }}
-                   </div>
+                        <span
+                            style="margin-right: 1rem; margin-top: 0.5rem;">Liczba piwek:</span>{{ form.number_of_beers }}
+                    </div>
                 </div>
         </div>
 
@@ -42,6 +49,11 @@
         window.location.assign("{% url 'beers:loan_list' %}");
     }
 </script>
+<style>
+    input[type="number"] {
+        width: 5rem;
+    }
+</style>
 <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 {{ form.media }}
 </div>

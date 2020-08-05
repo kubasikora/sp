@@ -27,7 +27,7 @@ class BeerAddView(CreateView):
     success_url = "/beers/loans"
 
     def form_valid(self, form):
-        number_of_beers = form.cleaned_data["number_of_beers"]
+        number_of_beers = form.cleaned_data["number_of_beers"] - 1
         form.cleaned_data.pop("number_of_beers")
         for _ in range(number_of_beers):
             self.object = LoanedBeer.objects.create(**form.cleaned_data)

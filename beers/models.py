@@ -5,8 +5,8 @@ from django.core.exceptions import ValidationError
 # Create your models here.
 
 class LoanedBeer(models.Model):
-    loaner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="loaners", verbose_name="Pożyczkodawca")
-    loanee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="loanees", verbose_name="Pożyczkobiorca")
+    loaner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="loaners", verbose_name="Piwkodawca")
+    loanee = models.ForeignKey(User, on_delete=models.CASCADE, related_name="loanees", verbose_name="Piwkobiorca")
     date = models.DateTimeField(auto_now_add=True, verbose_name="Data pożyczki")
     is_given_back = models.BooleanField(default=False, verbose_name="Czy oddane")
 

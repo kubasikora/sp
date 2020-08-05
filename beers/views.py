@@ -31,5 +31,4 @@ class BeerAddView(CreateView):
         form.cleaned_data.pop("number_of_beers")
         for _ in range(number_of_beers):
             self.object = LoanedBeer.objects.create(**form.cleaned_data)
-
         return super().form_valid(form)

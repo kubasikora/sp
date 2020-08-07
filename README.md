@@ -4,8 +4,10 @@ Serwer Piwny DS Riviera to aplikacja napisana przez mieszkańców akademika Rivi
 Jej zadaniem jest wsparcie w zarządzaniu pokojem. Jest ona utrzymywana na Raspberry Pi 3B+, które pełni rolę serwera aplikacji. 
 Na ten moment aplikacja posiada następujące moduły:
 - moduł użytkownika *accounts*,
-- moduł rankingu w fife *fifarank*.
+- moduł rankingu w fife *fifarank*,
+- moduł długów piwnych *beers*.
 
 Planowane są również moduły:
-- moduł zapisywania długów,
-- moduł zarządzania zakupami.
+- dashboard powitalny,
+- forum segmentu,
+- moduł zarządzania zakupami wspólnymi.

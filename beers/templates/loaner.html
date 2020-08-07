@@ -25,7 +25,7 @@
                                 <tr>
                                     <th style="text-align: center;" scope="col">Piwkobiorca</th>
                                     <th style="text-align: center;" scope="col">Data</th>
-                                    <th style="text-align: center;" style="width: 10em" scope="col">Akcje</th>
+                                    <th style="text-align: center; width: 15rem;" scope="col">Akcje</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,11 +33,11 @@
                                 <tr class="{% if beer.period > 7 %}table-danger{% endif %} {% if beer.period > 3 %}table-warning{% endif %}">
                                     <th style="text-align: center; vertical-align: middle;" scope="row"><b>{{ beer.loanee }}</b></th>
                                     <td style="text-align: center; vertical-align: middle;">{{ beer.date|date:"d.m.y H:i" }}</td>
-                                    <td style="text-align: center;">
+                                    <td style="text-align: center; width: 15rem;">
                                         {% if beer.is_given_back %}
                                             <button disabled class="btn btn-outline-dark">Oddane</button>
                                         {% else %}
-                                    <button class="btn btn-outline-dark" onclick="returnBeer({{ beer.id | urlencode }})">Oddaj</button>
+                                    <button class="btn btn-outline-dark" onclick="returnBeer({{ beer.id | urlencode }})">Potwierdź oddanie</button>
                                         {% endif %}
                                     </td>
                                 </tr>

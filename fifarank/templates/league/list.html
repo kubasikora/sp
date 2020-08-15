@@ -24,7 +24,7 @@
                         </div>
                         {% else %}
                         {% for league in leagues %}
-                        <div class="card">
+                        <div class="card" style="margin-bottom: 1rem;">
                             <div class="card-header" id="heading{{ match.id }}">
                                 <h2 class="mb-0">
                                     <a href="{% url 'fifarank:league_detail' league.id %}" style="color: black;">

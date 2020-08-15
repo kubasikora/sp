@@ -19,7 +19,7 @@
                 <div class="col">
                     <ul class="list-group list-group-flush">
                         {% for team in teams %}
-                        <div class="card">
+                        <div class="card" style="margin-bottom: 1rem;">
                             <div class="card-header" id="heading{{ match.id }}">
                                 <h2 class="mb-0">
                                     <a href="{% url 'fifarank:team_detail' team.id %}" style="color: black">

@@ -15,14 +15,14 @@
             <br />
             <div class="row">
                 <div class="col">
-                    <div class="accordion" id="accordionExample">
+                    <div>
                         {% if games|length == 0 %}
                         <div>
                             <p style="text-align: center; color: gray;">Brak dodanych gier</p>
                         </div>
                         {% else %}
                         {% for game in games %}
-                        <div class="card">
+                        <div class="card"  style="margin-bottom: 1rem;">
                             <div class="card-header" id="heading{{ game.id }}">
                                 <h2 class="mb-0">
                                     <a href="{% url 'fifarank:game_detail' game.id %}" style="color: black;">

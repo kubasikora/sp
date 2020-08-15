@@ -1,22 +1,21 @@
 <div class="row">
     <div class="col">
-        <div class="accordion" id="accordionExample">
+        <div  >
             {% if matches|length == 0 %}
             <div>
                 <p style="text-align: center; color: gray;">Brak rozegranych spotkań</p>
             </div>
             {% else %}
             {% for match in matches %}
-            <div class="card">
-                <div class="card-header" id="heading{{ match.id }}">
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card-header">
                     <h2 class="mb-0" style="text-align: center;">
                         {{ match.homeUser }} {{ match.resultHome }} - {{ match.resultAway }}
                         {{ match.awayUser }}
                     </h2>
                 </div>
 
-                <div id="{{ match.id }}" class="collapse show" aria-labelledby="heading{{ match.id }}"
-                    data-parent="#accordionExample">
+                <div id="{{ match.id }}" class="collapse show" aria-labelledby="heading{{ match.id }}">
                     <div class="card-body" style="padding: 0.5em ;">
                         <div class="container">
                             {% if match.inPKs %}

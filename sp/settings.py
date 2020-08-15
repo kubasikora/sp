@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fifarank',
     'accounts',
-    'beers'
+    'beers',
+    'blog'
 ]
 
 MIDDLEWARE = [

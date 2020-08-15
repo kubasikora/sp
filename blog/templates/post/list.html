@@ -1,0 +1,63 @@
+{% extends "blog.html" %}
+
+{% block content %}
+<div class="card" style="margin-bottom: 1rem;">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h1>Ostatnie posty</h1>
+                </div>
+                <div class="col-6" style="text-align: right; margin-top: auto;">
+                    <a href="{% url 'blog:home' %}">
+                        <h5 style="color: black;">Dodaj</h5>
+                    </a>
+                </div>
+            </div>
+            <br />
+            <ul class="list-group list-group-flush">
+                <hr />
+                {% if posts|length == 0 %}
+                <div>
+                    <p style="text-align: center; color: gray;">Brak dodanych postów</p>
+                </div>
+                {% else %}
+                {% for post in posts %}
+                <div class="card" style="margin-bottom: 2rem;">
+                    <div class="card-header" id="heading{{ post.id }}">
+                        <h2 class="mb-0">
+                            {{ post.title }}
+                        </h2>
+                    </div>
+
+                    <div id="{{ post.id }}" class="collapse show" aria-labelledby="heading{{ post.id }}"
+                        data-parent="#accordionExample">
+                        <div class="card-body" style="padding: 0.5em ;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-10" style="margin-top: 0.5rem;">
+                                        {{ post.content|truncatechars:512 }}
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row" style="color: gray;">
+                                    <div class="col-12" style="text-align:right">
+                                        Dodano {{ post.creation_date|date:"d.m.y H:i" }} przez {{ post.author }}, liczba komentarzy: {{ post.comments|length }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% include "pagination.html" with page=matches %}
+            </div>
+        </div>
+        </ul>
+    </div>
+</div>
+{% endblock %}

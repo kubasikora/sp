@@ -8,6 +8,13 @@ class PostListView(ListView):
     paginate_by = 5
     template_name = "post/list.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for post in context["object_list"]:
+            post.comments_num = len(post.comments.all())
+        return context
+
+
 class PostDetailView(DetailView):
     model = BlogPost
     context_object_name = "post"

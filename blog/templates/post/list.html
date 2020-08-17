@@ -25,9 +25,11 @@
                 {% for post in posts %}
                 <div class="card" style="margin-bottom: 1rem;">
                     <div class="card-header" id="heading{{ post.id }}">
-                        <h2 class="mb-0">
-                            {{ post.title }}
-                        </h2>
+                        <a href="{% url 'blog:post_detail' post.id %}" style="color:black;">
+                            <h2 class="mb-0" style="color: black;">
+                                {{ post.title }}
+                            </h2>
+                        </a>
                     </div>
 
                     <div id="{{ post.id }}" class="collapse show" aria-labelledby="heading{{ post.id }}"
@@ -39,10 +41,11 @@
                                         {{ post.content|truncatechars:512 }}
                                     </div>
                                 </div>
-                                <br/>
+                                <br />
                                 <div class="row" style="color: gray;">
                                     <div class="col-12" style="text-align:right">
-                                        Dodano {{ post.creation_date|date:"d.m.y H:i" }} przez {{ post.author }}, liczba komentarzy: {{ post.comments|length }}
+                                        Dodano {{ post.creation_date|date:"d.m.y H:i" }} przez {{ post.author }}, liczba
+                                        komentarzy: {{ post.comments|length }}
                                     </div>
                                 </div>
                             </div>

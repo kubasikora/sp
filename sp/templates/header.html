@@ -11,11 +11,9 @@
                 <a class="nav-link" href="{% url 'fifarank:menu' %}">Ranking</a>
             </li>
 
-            {% if debug %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'beers:menu' %}">Piwka</a>
             </li>
-            {% endif %}
 
             {% if user.is_superuser %}
             <li class="nav-item">

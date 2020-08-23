@@ -17,12 +17,24 @@
                         </div>
                         {% else %}
                         {% for rating in ratings %}
+                        {% if rating.position == 1 %}
+                        <li class="list-group-item" style="background-color: rgba(255,215,0,0.1); border: rgba(255,215,0,0.2) solid 1px;">
+                        {% elif rating.position == 2 %}
+                        <li class="list-group-item" style="background-color: rgba(196,202,206,0.1); border: rgba(196,202,206,0.2) solid 1px;">
+                        {% elif rating.position == 3 %}
+                        <li class="list-group-item" style="background-color: rgba(128,74,0,0.1); border: rgba(128,74,0,0.2) solid 1px;">
+                        {% else %}
                         <li class="list-group-item">
+                        {% endif %}
                             <b style="font-size: 24px; margin-right: auto; color: black">{{ rating.position }}.
                                 <a href="{% url 'fifarank:user_rating_detail' rating.id %}" style="color: black">
-                                    {{ rating.user.username }}</a></b>
+                                    {{ rating.user.username }}
+                                </a>
+                            </b>
                             <span style="font-size: 16px">{{ rating.value }}</span>
+                            
                         </li>
+                        
                         {% endfor %}
                         {% endif %}
                     </ul>

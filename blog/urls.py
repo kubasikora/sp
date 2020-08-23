@@ -7,5 +7,5 @@ app_name = "blog"
 urlpatterns = [
     # post views
     path("", login_required(views.PostListView.as_view()), name="home"),
-    path("<str:pk>", login_required(views.PostDetailView.as_view()), name="post_detail")
+    path("post/<str:pk>", login_required(views.PostDetailView.as_view()), name="post_detail")
 ]

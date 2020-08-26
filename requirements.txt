@@ -8,7 +8,7 @@ constantly==15.1.0
 cryptography==3.0
 daphne==2.5.0
 dataclasses==0.7
-Django==3.0.7
+Django==3.0.5
 django-appconf==1.0.4
 django-autocomplete-light==3.5.1
 django-environ==0.4.5
@@ -19,12 +19,14 @@ gunicorn==20.0.4
 hyperlink==19.0.0
 idna==2.10
 incremental==17.5.0
+psycopg2==2.8.5
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
 PyHamcrest==2.0.2
 pyOpenSSL==19.1.0
 python-dateutil==2.8.1
+python-dotenv==0.14.0
 pytz==2020.1
 service-identity==18.1.0
 six==1.15.0

@@ -11,5 +11,6 @@ urlpatterns = [
     path("user/autocomplete/", login_required(views.UserLinkedDataAutocompleteView.as_view()), name="user_autocomplete"),
     path('fifarank/', include('fifarank.urls', namespace='fifarank')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
-    path('beers/', include('beers.urls', namespace='beers'))
+    path('beers/', include('beers.urls', namespace='beers')),
+    path('sews/', include('sews.urls', namespace='sews'))
 ]

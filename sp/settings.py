@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'fifarank',
     'accounts',
     'beers',
-    'blog'
+    'blog',
+    'sews'
 ]
 
 MIDDLEWARE = [

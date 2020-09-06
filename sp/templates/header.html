@@ -15,6 +15,10 @@
                 <a class="nav-link" href="{% url 'beers:menu' %}">Piwka</a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'sews:menu' %}">SEWS</a>
+            </li>
+
             {% if user.is_superuser %}
             <li class="nav-item">
                 <a class="nav-link" href="/admin">Panel administracyjny</a>

@@ -5,7 +5,7 @@ import sys
 from dotenv import load_dotenv
 
 def main():
-    load_dotenv()
+    load_dotenv(dotenv_path='dev.env', verbose=True)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sp.settings')
     try:
         from django.core.management import execute_from_command_line

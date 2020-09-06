@@ -11,3 +11,7 @@ Planowane są również moduły:
 - dashboard powitalny,
 - forum segmentu,
 - moduł zarządzania zakupami wspólnymi.
+
+
+### Uruchomienie bazy
+docker container run -p 5432:5432 -v spdb:/var/lib/postgresql/data -e POSTGRES_USER=serwerpiwny -e POSTGRES_DB=serwerpiwny -e POSTGRES_PASSWORD=serwerpiwny postgres

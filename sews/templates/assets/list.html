@@ -11,22 +11,40 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group">
                         <hr />
                         {% if assets|length == 0 %}
                         <div>
                             <p style="text-align: center; color: gray;">Brak dodanych rzeczy wspólnych</p>
                         </div>
                         {% else %}
-                        {% for asset in assets %}
-                            <h2>{{ asset.buyer }}: {{ asset.assetType }} / {{ asset.value }}</h2>
-                        {% endfor %}
+                        <table class="table table-responsive-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th style="text-align: center;" scope="col">Kupujący</th>
+                                    <th style="text-align: center;" scope="col">Rodzaj</th>
+                                    <th style="text-align: center;" scope="col">Data</th>
+                                    <th style="text-align: center;" scope="col">Cena</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for asset in assets %}
+                                <tr>
+                                    <th style="text-align: center; vertical-align: middle;" scope="row">
+                                    {{ asset.buyer }}</th>
+                                    <td style="text-align: center; vertical-align: middle;">{{ asset.assetType }}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{{ asset.dateOfPurchase|date:"d.m.y H:i" }}</td>
+                                    <td style="text-align: center; vertical-align: middle; text-align: center;">{{ asset.value }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                         {% endif %}
                     </ul>
                 </div>
                 <br />
             </div>
-            <div class="row">
+            <div class="row" style="margin-top: 1rem;">
                 <div class="col-12">
                     {% include "pagination.html" with page=matches %}
                 </div>

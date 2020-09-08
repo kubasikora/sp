@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from django.db.models import Count
 from django.contrib.auth.models import User
 from django import forms
-from django.urls import reverse
+from django.urls import reverse_lazy
 from fifarank.models import Team, UserRating, Match, League, Game
 from fifarank.logic.matchRecord import getUserRecord
 from dal import autocomplete
@@ -34,7 +34,7 @@ class MatchAddView(CreateView):
     model = Match
     template_name = "match/add.html"
     form_class = MatchForm
-    success_url = "/fifarank/matches"
+    success_url = reverse_lazy("fifarank:match_list")
 
 
 class LeagueListView(ListView):
@@ -75,7 +75,7 @@ class LeagueLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
 class LeagueAddView(CreateView):
     model = League
     template_name = "league/add.html"
-    success_url = "/fifarank/leagues"
+    success_url = reverse_lazy("fifarank:league_list")
     fields = "__all__"
 
 
@@ -121,7 +121,7 @@ class TeamAddView(CreateView):
     model = Team
     template_name = "team/add.html"
     form_class = TeamForm
-    success_url = "/fifarank/teams"
+    success_url = reverse_lazy("fifarank:team_list")
 
 
 class UserRankingList(ListView):

@@ -29,14 +29,4 @@ class AssetAddView(CreateView):
 class AssetTypeListView(ListView):
     queryset = AssetType.objects.all()
     template_name = "assetType/list.html"
-    content_object_name = "types"
-
-class AssetTypeLinkedDataAutocompleteView(autocomplete.Select2QuerySetView):
-    model = AssetType
-
-    def get_queryset(self):
-        qs = AssetType.objects
-        assetTypeQuery = self.q
-        if assetTypeQuery:
-            qs = qs.filter(username__startswith=assetTypeQuery)
-        return qs.all()
+    context_object_name = "types"

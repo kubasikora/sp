@@ -1,0 +1,41 @@
+{% extends "sews.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h1>Dostępne typy</h1>
+                </div>
+                <div class="col-6" style="text-align: right; margin-top: auto;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <hr />
+                        {% if types|length == 0 %}
+                        <div>
+                            <p style="text-align: center; color: gray;">Brak dodanych typów</p>
+                        </div>
+                        {% else %}
+                        {% for type in types %}
+                        <div class="card" style="margin-bottom: 1rem;">
+                            <div class="card-header" id="heading{{ match.id }}">
+                                <h3 class="mb-0">
+                                    <span style="font-size: 24px; margin-right: auto; color: black; ">{{ type.name }}
+                                    </span>
+                                </h3>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

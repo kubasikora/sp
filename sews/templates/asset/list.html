@@ -18,10 +18,15 @@
                             <p style="text-align: center; color: gray;">Brak dodanych rzeczy wspólnych</p>
                         </div>
                         {% else %}
+                        {% if total_expenditure %}
+                        <p>Suma wkładu w SEWS: {{ total_expenditure }}</p>
+                        {% endif %}
                         <table class="table table-responsive-sm">
                             <thead class="thead-dark">
                                 <tr>
+                                    {% if is_personal is None %}
                                     <th style="text-align: center;" scope="col">Kupujący</th>
+                                    {% endif %}
                                     <th style="text-align: center;" scope="col">Rodzaj</th>
                                     <th style="text-align: center;" scope="col">Data</th>
                                     <th style="text-align: center;" scope="col">Cena</th>
@@ -30,11 +35,15 @@
                             <tbody>
                                 {% for asset in assets %}
                                 <tr>
+                                    {% if is_personal is None %}
                                     <th style="text-align: center; vertical-align: middle;" scope="row">
-                                    {{ asset.buyer }}</th>
+                                        {{ asset.buyer }}</th>
+                                    {% endif %}
                                     <td style="text-align: center; vertical-align: middle;">{{ asset.assetType }}</td>
-                                    <td style="text-align: center; vertical-align: middle;">{{ asset.dateOfPurchase|date:"d.m.y H:i" }}</td>
-                                    <td style="text-align: center; vertical-align: middle; text-align: center;">{{ asset.value }}zł</td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        {{ asset.dateOfPurchase|date:"d.m.y H:i" }}</td>
+                                    <td style="text-align: center; vertical-align: middle; text-align: center;">
+                                        {{ asset.value }}zł</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

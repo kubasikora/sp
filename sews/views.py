@@ -10,7 +10,7 @@ class AssetListView(ListView):
     queryset = Asset.objects.all()
     template_name = "asset/list.html"
     context_object_name = "assets"
-    paginate_by = 20
+    paginate_by = 50
 
 class AssetAddView(CreateView):
     class AssetForm(forms.ModelForm):
@@ -30,3 +30,23 @@ class AssetTypeListView(ListView):
     queryset = AssetType.objects.all()
     template_name = "assetType/list.html"
     context_object_name = "types"
+
+class PersonalAssetListView(ListView):
+    template_name = "asset/list.html"
+    context_object_name = "assets"
+    paginate_by = 50
+
+    def get_queryset(self):
+        return Asset.objects.filter(buyer=self.request.user).all()
+
+    def sum_expenditure(self, qs):
+        total_expenditure = Decimal('0.0')
+        for item in qs:
+            total_expenditure += item.value
+        return total_expenditure
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["is_personal"] = True
+        context["total_expenditure"] = self.sum_expenditure(context["object_list"])
+        return context

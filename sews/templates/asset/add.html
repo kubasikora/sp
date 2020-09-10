@@ -6,28 +6,41 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1>System Ewidencji Wspólnego Szitu</h1>
+                    <a href="{% url 'sews:asset_list' %}">Powrót</a>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col">
+                    <h1>Dodaj nowy przedmiot</h1>
                 </div>
             </div>
             {% load static %}
+            
             <form method="post">
+
                 <div class="row">
                     {{ form.media.css }}
                     {% csrf_token %}
-                    <div class="container-fluid">
+                    <div class="container">
                         <br/>
-                        <div class="row no-gutters">
-                            {{ form.assetType.label }}: {{ form.assetType }}
+                        <div class="row">
+                            <div class="col-2 form-label">
+                            {{ form.assetType.label }}:</div>
+                            <div class="col-10"> {{ form.assetType }}</div>
                         </div>
                         <br/>
-                        <div class="row no-gutters">
-                            {{ form.value.label }}: {{ form.value }}
+                        <div class="row">
+                            <div class="col-2 form-label">
+                            {{ form.value.label }}:
+                            </div> 
+                            <div class="col-10">{{ form.value }}</div>
                         </div>
                         <br/>
                     </div>
                 </div>
                 <div class="row">
-                    <div style="float:right">
+                    <div style="margin-left: auto;">
                         <input class="btn btn-dark" type="submit" value="Dodaj">
                     </div>
                 </div>
@@ -35,4 +48,22 @@
         </div>
     </div>
 </div>
+
+<style>
+    .form-label {
+        font-size: 24px;
+    }
+
+    select[name="assetType"] {
+        font-size: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+    input[name="value"] {
+        font-size: 20px;
+        width: 100%;
+        height: 100%;
+    }
+</style>
 {% endblock %}

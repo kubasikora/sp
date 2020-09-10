@@ -146,7 +146,7 @@ class UserRankingDetail(DetailView):
         matches = self.object.user.homeUsers.all() | self.object.user.awayUsers.all() 
         distinctMatches = matches.distinct()
         context["matches"] = distinctMatches.order_by("-date")[:10]
-        context["match_count"] = len(distinctMatches)
+        context["match_count"] = distinctMatches.count()
 
         (w,d,l) = getUserRecord(distinctMatches.all(), self.object.user)
         context["user_record"] = f"{w}W - {d}D - {l}L"

@@ -31,6 +31,12 @@ class AssetTypeListView(ListView):
     template_name = "assetType/list.html"
     context_object_name = "types"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for item in context["object_list"]:
+            item.count = Asset.objects.filter(assetType=item).count()
+        return context
+
 class PersonalAssetListView(ListView):
     template_name = "asset/list.html"
     context_object_name = "assets"

@@ -5,6 +5,12 @@
     <div class="card-body">
         <div class="container">
             <div class="row">
+                <div class="col">
+                    <a href="{% url 'sews:asset_list' %}">Powrót</a>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
                 <div class="col-6">
                     <h1>Dostępne typy</h1>
                 </div>
@@ -24,8 +30,10 @@
                         <div class="card" style="margin-bottom: 1rem;">
                             <div class="card-header" id="heading{{ match.id }}">
                                 <h3 class="mb-0">
-                                    <span style="font-size: 24px; margin-right: auto; color: black; ">{{ type.name }}
-                                    </span>
+                                    <p style="font-size: 24px; margin-right: auto; color: black; ">{{ type.name }}
+                                    </p>
+                                    <p style="font-size: 16px; color: gray; margin-bottom: 0; ">Kupiony  {{ type.count }} raz{% if type.count != 1%}y{% endif %} 
+                                    </p >
                                 </h3>
                             </div>
                         </div>

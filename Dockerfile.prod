@@ -1,0 +1,16 @@
+FROM python:3.6
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt 
+
+COPY sp/ ./sp
+COPY beers/ ./beers
+COPY fifarank ./fifarank
+COPY blog/ ./blog
+COPY sews/ ./sews
+COPY accounts/ ./accounts
+COPY manage.py .
+
+EXPOSE 8000
+CMD ["gunicorn", "sp.wsgi:application", "--bind" "0.0.0.0:8000"]

@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  web:
+    build:
+      dockerfile: Dockerfile.prod
+
+  nginx:
+    ports:
+      - 80:80

@@ -4,7 +4,14 @@ services:
   web:
     build:
       dockerfile: Dockerfile.prod
+    env_file: 
+      - .env
 
+  db:
+    env_file: 
+      - .env
+      
   nginx:
     ports:
       - 80:80
+  

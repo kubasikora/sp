@@ -7,7 +7,7 @@ services:
     volumes:
       - static:/app/static
     env_file:
-      - .env
+      - dev.env
     depends_on:
       - db
       
@@ -18,7 +18,7 @@ services:
     volumes:
       - spdb:/var/lib/postgresql/data/
     env_file:
-      - .env
+      - dev.env
 
   nginx:
     build: ./nginx

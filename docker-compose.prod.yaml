@@ -6,12 +6,15 @@ services:
       dockerfile: Dockerfile.prod
     env_file: 
       - .env
+    restart: always
 
   db:
     env_file: 
       - .env
+    restart: always
       
   nginx:
     ports:
       - 80:80
+    restart: always
   

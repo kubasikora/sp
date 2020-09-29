@@ -1,5 +1,6 @@
 from django.urls import path
 from fifarank import views
+from fifarank import api
 from django.contrib.auth.decorators import login_required
 
 app_name = "fifarank"
@@ -25,5 +26,18 @@ urlpatterns = [
     path("ranking/<str:pk>", login_required(views.UserRankingDetail.as_view()), name="user_rating_detail"),
     # game views
     path("games", login_required(views.GameListView.as_view()), name="game_list"),
-    path("games/<str:pk>", login_required(views.GameDetailView.as_view()), name="game_detail")
+    path("games/<str:pk>", login_required(views.GameDetailView.as_view()), name="game_detail"),
+    
+    # api views
+    path("api/games", login_required(api.GameList.as_view()), name="game_api"),
+    path("api/games/<str:pk>", login_required(api.GameInstance.as_view()), name="game_instance_api"),
+    
+    path("api/teams", login_required(api.TeamList.as_view()), name="team_api"),
+    path("api/teams/<str:pk>", login_required(api.TeamInstance.as_view()), name="team_instance_api"),
+
+    path("api/matches", login_required(api.MatchList.as_view()), name="match_list_api"),
+    path("api/matches/<str:pk>", login_required(api.MatchInstance.as_view()), name="match_instance_api"),
+    
+    path("api/ratings", login_required(api.UserRatingList.as_view()), name="ranking_api"),
+    path("api/ratings/<str:pk>", login_required(api.UserRatingInstance.as_view()), name="ranking_user_api")
 ]

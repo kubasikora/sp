@@ -12,7 +12,7 @@ coreschema==0.0.4
 cryptography==3.0
 daphne==2.5.0
 dataclasses==0.7
-Django==3.0.7
+Django==3.0.12
 django-appconf==1.0.4
 django-autocomplete-light==3.5.1
 django-environ==0.4.5
